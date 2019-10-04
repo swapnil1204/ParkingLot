@@ -9,6 +9,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+class DummyOwner extends Owner {
+    public boolean wasCalled = false;
+
+    @Override
+    public void gotNotification() {
+        wasCalled = true;
+    }
+}
+
 public class ParkingLotExceptionTest {
 
     private static Owner owner;
@@ -83,13 +92,14 @@ public class ParkingLotExceptionTest {
 
     @Test
     void givenParkingLot_WhenParkingLotIsFull_thenShouldNotifyToOwner() throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
-        ParkingLot parkingLot = new ParkingLot(2, owner);
+        DummyOwner dummyOwner = new DummyOwner();
+        ParkingLot parkingLot = new ParkingLot(2, dummyOwner);
 
         Object carOne = new Object();
         Object carTwo = new Object();
         parkingLot.park(carOne);
         parkingLot.park(carTwo);
 
-        assertEquals("parking lot is full", owner.getNotification());
+        assertTrue(dummyOwner.wasCalled);
     }
 }

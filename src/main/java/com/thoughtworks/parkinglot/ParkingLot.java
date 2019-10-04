@@ -28,7 +28,7 @@ public class ParkingLot {
             }
             vehicles.add(object);
             if (isFull()) {
-                owner.notify("parking lot is full");
+                owner.gotNotification();
             }
             spaceAvailable--;
             return true;
