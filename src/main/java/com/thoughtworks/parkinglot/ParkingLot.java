@@ -17,24 +17,22 @@ public class ParkingLot {
 
     public ParkingLot(int capacity, Owner owner) {
         this.capacity = capacity;
-        this.spaceAvailable = capacity;
         this.owner = owner;
     }
 
-    public boolean park(Object object) throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
-        if (spaceAvailable > 0) {
-            if (isVehicleAvailable(object)) {
-                throw new SameVehicleIsAlreadyParkedException();
-            }
-            vehicles.add(object);
-            if (isFull()) {
-                owner.gotNotification();
-            }
-            spaceAvailable--;
-            return true;
+    public void park(Object object) throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
+        if (!(vehicles.size() < capacity)) {
+            throw new ParkingLotFullException();
         }
-        throw new ParkingLotFullException();
+        if (isVehicleAvailable(object)) {
+            throw new SameVehicleIsAlreadyParkedException();
+        }
+        vehicles.add(object);
+        if (isFull()) {
+            owner.gotNotification();
+        }
     }
+
 
     private boolean isVehicleAvailable(Object object) {
         return vehicles.contains(object);
@@ -54,7 +52,7 @@ public class ParkingLot {
 
     public Object unPark(Object car) throws CarNotParkedHereException {
         if (isVehicleAvailable(car)) {
-            if(!isFull()) {
+            if (!isFull()) {
                 vehicles.remove(car);
                 return car;
             }

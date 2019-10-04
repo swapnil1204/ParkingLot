@@ -22,6 +22,10 @@ class DummyOwner implements Owner {
         numberOfTimesNotifiedWhenSpaceAvailable++;
     }
 
+    public boolean wasNotifiedAboutFullSpaceOnce() {
+        return numberOfTimesNotified == 1;
+    }
+
 }
 
 public class ParkingLotExceptionTest {
@@ -37,8 +41,7 @@ public class ParkingLotExceptionTest {
     void givenParkingLotHasCapacity_WhenPark_ThenShouldPark() throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
         ParkingLot parkingLot = new ParkingLot(1, dummyOwner); //this represent available lots
 
-        assertTrue(parkingLot.park(new Object()));
-        //assertDoesNotThrow(() -> parkingLot.park(new Object()));
+        assertDoesNotThrow(() -> parkingLot.park(new Object()));
     }
 
     @Test
@@ -61,7 +64,6 @@ public class ParkingLotExceptionTest {
         SameVehicleIsAlreadyParkedException exception = assertThrows(SameVehicleIsAlreadyParkedException.class, () -> {
             parkingLot.park(object);
         });
-
     }
 
     @Test
