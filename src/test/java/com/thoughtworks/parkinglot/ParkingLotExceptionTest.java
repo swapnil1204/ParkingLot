@@ -65,18 +65,6 @@ public class ParkingLotExceptionTest {
     }
 
     @Test
-    void givenParkingLotIsEmpty_WhenUnPark_thenShouldNotBeAbleToUnPark() throws ParkingLotException {
-        ParkingLot parkingLot = new ParkingLot(2);
-        Object AnyOtherCar = new Object();
-
-        ParkingLotException exception = assertThrows(ParkingLotException.class, () -> {
-            parkingLot.unPark(AnyOtherCar);
-        });
-
-        assertEquals("the parking lot has no car", exception.getMessage());
-    }
-
-    @Test
     void givenTwoCars_WhenUnPark_thenShouldBeAbleToUnPark() throws ParkingLotException {
         ParkingLot parkingLot = new ParkingLot(2);
         Object carOne = new Object();

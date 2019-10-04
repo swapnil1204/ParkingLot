@@ -40,9 +40,6 @@ public class ParkingLot {
         if (vehicles.contains(car)) {
             return vehicles.remove(vehicles.indexOf(car));
         }
-        if (vehicles.isEmpty()) {
-            throw new ParkingLotException("the parking lot has no car");
-        }
         throw new ParkingLotException("the car may not be parked here");
     }
 
