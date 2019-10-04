@@ -67,7 +67,7 @@ public class ParkingLotExceptionTest {
     }
 
     @Test
-    void givenTwoCars_WhenUnPark_thenShouldBeAbleToUnPark() throws ParkingLotException {
+    void givenParkingLot_WhenUnParkTwoCars_thenShouldBeAbleToUnPark() throws ParkingLotException {
         ParkingLot parkingLot = new ParkingLot(2);
         Object carOne = new Object();
         Object carTwo = new Object();
