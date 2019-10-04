@@ -19,21 +19,21 @@ public class ParkingLot {
         this.owner = null;
     }
 
-    public ParkingLot(int capacity, Owner owner) {
+    public ParkingLot(int capacity, Owner owner) { // TODO - owner needs to be mandatory requirement
         this.capacity = capacity;
         this.spaceAvailable = capacity;
         this.owner = owner;
     }
 
-    public boolean park(Object object) throws ParkingLotException {
+    public boolean park(Object object) throws ParkingLotException { // TODO - park returns void.
         if (spaceAvailable > 0) {
             if (vehicles.contains(object)) {
-                throw new ParkingLotException("You cannot park same vehicle");
+                throw new ParkingLotException("You cannot park same vehicle"); // TODO - different exceptions for different scenarios.
             }
             vehicles.add(object);
-            if (vehicles.size() == capacity) {
+            if (vehicles.size() == capacity) { // TODO - extract conditions into methods
                 if (owner != null) {
-                    owner.setNotification("parking lot is full");
+                    owner.notify("parking lot is full");
                 }
             }
             spaceAvailable--;
@@ -54,7 +54,7 @@ public class ParkingLot {
         if (vehicles.contains(car)) {
             return vehicles.remove(vehicles.indexOf(car));
         }
-        throw new ParkingLotException("the car may not be parked here");
+        throw new ParkingLotException("the car may not be parked here"); // TODO - different exception.
     }
 
 }
