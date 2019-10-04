@@ -23,7 +23,7 @@ public class ParkingLot {
 
     public boolean park(Object object) throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
         if (spaceAvailable > 0) {
-            if (vehicles.contains(object)) {
+            if (isVehicleAvailable(object)) {
                 throw new SameVehicleIsAlreadyParkedException();
             }
             vehicles.add(object);
@@ -34,6 +34,10 @@ public class ParkingLot {
             return true;
         }
         throw new ParkingLotFullException();
+    }
+
+    private boolean isVehicleAvailable(Object object) {
+        return vehicles.contains(object);
     }
 
     private boolean isFull() {
@@ -49,7 +53,7 @@ public class ParkingLot {
     }
 
     public Object unPark(Object car) throws CarNotParkedHereException {
-        if (vehicles.contains(car)) {
+        if (isVehicleAvailable(car)) {
             return vehicles.remove(vehicles.indexOf(car));
         }
         throw new CarNotParkedHereException();
