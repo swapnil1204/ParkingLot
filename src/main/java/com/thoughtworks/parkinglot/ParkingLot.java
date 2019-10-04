@@ -33,7 +33,7 @@ public class ParkingLot {
             vehicles.add(object);
             if (vehicles.size() == capacity) {
                 if (owner != null) {
-                    owner.inform();
+                    owner.setNotification("parking lot is full");
                 }
             }
             spaceAvailable--;

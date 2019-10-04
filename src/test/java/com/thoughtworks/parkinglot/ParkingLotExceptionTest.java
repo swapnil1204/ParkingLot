@@ -88,6 +88,6 @@ public class ParkingLotExceptionTest {
         parkingLot.park(carOne);
         parkingLot.park(carTwo);
 
-        assertEquals("parking lot is full", owner.inform());
+        assertEquals("parking lot is full", owner.getNotification());
     }
 }

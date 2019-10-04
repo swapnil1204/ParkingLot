@@ -1,9 +1,14 @@
 package com.thoughtworks.parkinglot;
 
 public class Owner {
+    String message;
 
-    public String inform() {
-        return "parking lot is full";
+    public String getNotification() {
+        return message;
+    }
+
+    public void setNotification(String message) {
+        this.message = message;
     }
 }
 
