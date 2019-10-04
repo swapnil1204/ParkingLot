@@ -7,7 +7,6 @@ public class SanjayScenarioTwo{
 
     public void park(ParkingLot parkingLotOne, ParkingLot parkingLotTwo) {
         Object carOne = new Object();
-
         try {
             parkingLotOne.park(carOne);
             parkingLotOne.park(carOne);

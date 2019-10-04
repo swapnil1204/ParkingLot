@@ -1,12 +1,15 @@
 package com.thoughtworks.parkinglot;
 
 import com.thoughtworks.ParkingLotException;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotExceptionTest {
+
     @Test
     void givenParkingLotHasCapacity_WhenPark_ThenShouldPark() throws ParkingLotException {
         ParkingLot parkingLot = new ParkingLot(1); //this represent available lots
@@ -19,16 +22,14 @@ public class ParkingLotExceptionTest {
         ParkingLot parkingLot = new ParkingLot(1); // spaceAvailable = 1
         parkingLot.park(new Object()); // spaceAvailable - -
 
-        //assertFalse(parkingLot.park(new Object()));
-
         ParkingLotException exception = assertThrows(ParkingLotException.class, () -> {
             parkingLot.park(new Object());
 
         });
         assertEquals("parking lot is full", exception.getMessage());
     }
-    @Test
 
+    @Test
     void givenParkingSameObject_WhenPark_ThenShouldNotPark() throws ParkingLotException {
         ParkingLot parkingLot = new ParkingLot(2);
 
@@ -47,7 +48,7 @@ public class ParkingLotExceptionTest {
         Object alreadyParkedCar = new Object();
         parkingLot.park(alreadyParkedCar);
 
-        assertEquals(alreadyParkedCar,parkingLot.unPark(alreadyParkedCar));
+        assertEquals(alreadyParkedCar, parkingLot.unPark(alreadyParkedCar));
     }
 
     @Test
@@ -72,7 +73,20 @@ public class ParkingLotExceptionTest {
         parkingLot.park(carOne);
         parkingLot.park(carTwo);
 
-        assertEquals(carOne,parkingLot.unPark(carOne));
-        assertEquals(carTwo,parkingLot.unPark(carTwo));
+        assertEquals(carOne, parkingLot.unPark(carOne));
+        assertEquals(carTwo, parkingLot.unPark(carTwo));
+    }
+
+    @Test
+    void givenParkingLot_WhenParkingLotIsFull_thenShouldNotifyToOwner() throws ParkingLotException {
+        Owner owner = new Owner();
+        ParkingLot parkingLot = new ParkingLot(2, owner);
+
+        Object carOne = new Object();
+        Object carTwo = new Object();
+        parkingLot.park(carOne);
+        parkingLot.park(carTwo);
+
+        assertEquals("parking lot is full", owner.inform());
     }
 }

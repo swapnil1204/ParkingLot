@@ -7,13 +7,22 @@ import java.util.List;
 
 public class ParkingLot {
 
+    private Owner owner;
     private int capacity;
     private int spaceAvailable;
+
     List<Object> vehicles = new ArrayList<>();
 
     public ParkingLot(int capacity) {
         this.capacity = capacity;
         this.spaceAvailable = capacity;
+        this.owner = null;
+    }
+
+    public ParkingLot(int capacity, Owner owner) {
+        this.capacity = capacity;
+        this.spaceAvailable = capacity;
+        this.owner = owner;
     }
 
     public boolean park(Object object) throws ParkingLotException {
@@ -22,6 +31,11 @@ public class ParkingLot {
                 throw new ParkingLotException("You cannot park same vehicle");
             }
             vehicles.add(object);
+            if (vehicles.size() == capacity) {
+                if (owner != null) {
+                    owner.inform();
+                }
+            }
             spaceAvailable--;
             return true;
         }
