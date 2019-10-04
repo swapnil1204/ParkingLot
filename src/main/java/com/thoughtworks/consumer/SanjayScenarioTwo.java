@@ -17,9 +17,9 @@ public class SanjayScenarioTwo{
         }
     }
 
-    public static void main(String[] args) {
-        SanjayScenarioTwo sanjayScenarioTwo = new SanjayScenarioTwo();
-        Owner owner = new Owner();
-        sanjayScenarioTwo.park(new ParkingLot(2,owner), new ParkingLot(3,owner));
-    }
+//    public static void main(String[] args) {
+//        SanjayScenarioTwo sanjayScenarioTwo = new SanjayScenarioTwo();
+//        Owner owner = new Owner();
+//        sanjayScenarioTwo.park(new ParkingLot(2,owner), new ParkingLot(3,owner));
+//    }
 }

@@ -8,23 +8,20 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DummyOwner extends Owner {
-    public boolean wasCalled = false;
-    public boolean wasCalledWhenSpaceAgainAvailable = false;
+class DummyOwner implements Owner {
     int numberOfTimesNotified = 0;
     int numberOfTimesNotifiedWhenSpaceAvailable = 0;
 
     @Override
     public void gotNotification() {
-        wasCalled = true;
         numberOfTimesNotified++;
     }
 
     @Override
     public void gotNotificationWhenSpaceAvailable() {
-        wasCalledWhenSpaceAgainAvailable = true;
         numberOfTimesNotifiedWhenSpaceAvailable++;
     }
+
 }
 
 public class ParkingLotExceptionTest {
@@ -109,7 +106,6 @@ public class ParkingLotExceptionTest {
         parkingLot.park(carOne);
         parkingLot.park(carTwo);
 
-        assertTrue(dummyOwner.wasCalled);
         assertEquals(1,dummyOwner.numberOfTimesNotified);
     }
 
@@ -123,7 +119,6 @@ public class ParkingLotExceptionTest {
         parkingLot.park(carTwo);
         parkingLot.unPark(carOne);
 
-        assertTrue(dummyOwner.wasCalledWhenSpaceAgainAvailable);
         assertEquals(1,dummyOwner.numberOfTimesNotifiedWhenSpaceAvailable);
     }
 }

@@ -19,9 +19,9 @@ public class SanjayScenerioOne{
         }
     }
 
-    public static void main(String[] args) {
-        SanjayScenerioOne sanjayScenerioOne = new SanjayScenerioOne();
-        Owner owner = new Owner();
-        sanjayScenerioOne.park(new ParkingLot(2,owner), new ParkingLot(3,owner));
-    }
+//    public static void main(String[] args) {
+//        SanjayScenerioOne sanjayScenerioOne = new SanjayScenerioOne();
+//        DummyOwner owner = new DummyOwner();
+//        sanjayScenerioOne.park(new ParkingLot(2,owner), new ParkingLot(3,owner));
+//    }
 }

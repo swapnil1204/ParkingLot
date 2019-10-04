@@ -1,10 +1,8 @@
 package com.thoughtworks.parkinglot;
 
-public class Owner {
-    public void gotNotification() {
-    }
+public interface Owner {
+    void gotNotification();
 
-    public void gotNotificationWhenSpaceAvailable() {
-    }
+    void gotNotificationWhenSpaceAvailable();
 }
 
