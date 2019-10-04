@@ -20,6 +20,7 @@ public class SanjayScenerioOne{
 
     public static void main(String[] args) {
         SanjayScenerioOne sanjayScenerioOne = new SanjayScenerioOne();
-        sanjayScenerioOne.park(new ParkingLot(2), new ParkingLot(3));
+        Owner owner = new Owner();
+        sanjayScenerioOne.park(new ParkingLot(2,owner), new ParkingLot(3,owner));
     }
 }

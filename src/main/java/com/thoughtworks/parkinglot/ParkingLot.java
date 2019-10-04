@@ -13,13 +13,7 @@ public class ParkingLot {
 
     List<Object> vehicles = new ArrayList<>();
 
-    public ParkingLot(int capacity) {
-        this.capacity = capacity;
-        this.spaceAvailable = capacity;
-        this.owner = null;
-    }
-
-    public ParkingLot(int capacity, Owner owner) { // TODO - owner needs to be mandatory requirement
+    public ParkingLot(int capacity, Owner owner) {
         this.capacity = capacity;
         this.spaceAvailable = capacity;
         this.owner = owner;
@@ -32,9 +26,7 @@ public class ParkingLot {
             }
             vehicles.add(object);
             if (vehicles.size() == capacity) { // TODO - extract conditions into methods
-                if (owner != null) {
                     owner.notify("parking lot is full");
-                }
             }
             spaceAvailable--;
             return true;
