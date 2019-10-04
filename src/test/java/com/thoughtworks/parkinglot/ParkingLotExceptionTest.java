@@ -30,7 +30,7 @@ public class ParkingLotExceptionTest {
     }
 
     @Test
-    void givenParkingSameObject_WhenPark_ThenShouldNotPark() throws ParkingLotException {
+    void givenParkingLot_WhenParkingSameObjects_ThenShouldNotBeParked() throws ParkingLotException {
         ParkingLot parkingLot = new ParkingLot(2);
 
         Object object = new Object();
@@ -39,6 +39,7 @@ public class ParkingLotExceptionTest {
             parkingLot.park(object);
 
         });
+
         assertEquals("You cannot park same vehicle", exception.getMessage());
     }
 
