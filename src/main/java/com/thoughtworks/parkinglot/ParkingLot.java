@@ -38,8 +38,7 @@ public class ParkingLot {
 
     public Object unPark(Object car) throws ParkingLotException {
         if (vehicles.contains(car)) {
-            vehicles.remove(car);
-            return car;
+            return vehicles.remove(vehicles.indexOf(car));
         }
         if (vehicles.isEmpty()) {
             throw new ParkingLotException("the parking lot has no car");
