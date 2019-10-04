@@ -36,12 +36,12 @@ public class ParkingLot {
                 '}';
     }
 
-    public boolean unPark(Object car) throws ParkingLotException {
+    public Object unPark(Object car) throws ParkingLotException {
         if (vehicles.contains(car)) {
             vehicles.remove(car);
-            return true;
+            return car;
         }
-        if(vehicles.isEmpty()){
+        if (vehicles.isEmpty()) {
             throw new ParkingLotException("the parking lot has no car");
         }
         throw new ParkingLotException("the car may not be parked here");

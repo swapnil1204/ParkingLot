@@ -27,8 +27,8 @@ public class ParkingLotExceptionTest {
         });
         assertEquals("parking lot is full", exception.getMessage());
     }
-
     @Test
+
     void givenParkingSameObject_WhenPark_ThenShouldNotPark() throws ParkingLotException {
         ParkingLot parkingLot = new ParkingLot(2);
 
@@ -47,7 +47,7 @@ public class ParkingLotExceptionTest {
         Object alreadyParkedCar = new Object();
         parkingLot.park(alreadyParkedCar);
 
-        assertTrue(parkingLot.unPark(alreadyParkedCar));
+        assertEquals(alreadyParkedCar,parkingLot.unPark(alreadyParkedCar));
     }
 
     @Test
@@ -74,5 +74,17 @@ public class ParkingLotExceptionTest {
         });
 
         assertEquals("the parking lot has no car", exception.getMessage());
+    }
+
+    @Test
+    void givenTwoCars_WhenUnPark_thenShouldBeAbleToUnPark() throws ParkingLotException {
+        ParkingLot parkingLot = new ParkingLot(2);
+        Object carOne = new Object();
+        Object carTwo = new Object();
+        parkingLot.park(carOne);
+        parkingLot.park(carTwo);
+
+        assertEquals(carOne,parkingLot.unPark(carOne));
+        assertEquals(carTwo,parkingLot.unPark(carTwo));
     }
 }
