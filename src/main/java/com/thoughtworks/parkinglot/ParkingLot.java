@@ -27,13 +27,17 @@ public class ParkingLot {
                 throw new SameVehicleIsAlreadyParkedException();
             }
             vehicles.add(object);
-            if (vehicles.size() == capacity) { // TODO - extract conditions into methods
+            if (isFull()) {
                 owner.notify("parking lot is full");
             }
             spaceAvailable--;
             return true;
         }
         throw new ParkingLotFullException();
+    }
+
+    private boolean isFull() {
+        return vehicles.size() == capacity;
     }
 
 
