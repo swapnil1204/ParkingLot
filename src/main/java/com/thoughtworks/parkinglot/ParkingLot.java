@@ -54,7 +54,13 @@ public class ParkingLot {
 
     public Object unPark(Object car) throws CarNotParkedHereException {
         if (isVehicleAvailable(car)) {
-            return vehicles.remove(vehicles.indexOf(car));
+            if(!isFull()) {
+                vehicles.remove(car);
+                return car;
+            }
+            vehicles.remove(car);
+            owner.gotNotificationWhenSpaceAvailable();
+            return car;
         }
         throw new CarNotParkedHereException();
     }

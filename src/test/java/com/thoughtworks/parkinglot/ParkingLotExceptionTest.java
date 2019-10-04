@@ -6,15 +6,24 @@ import com.thoughtworks.CarNotParkedHereException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class DummyOwner extends Owner {
     public boolean wasCalled = false;
+    public boolean wasCalledWhenSpaceAgainAvailable = false;
+    int numberOfTimesNotified = 0;
+    int numberOfTimesNotifiedWhenSpaceAvailable = 0;
 
     @Override
     public void gotNotification() {
         wasCalled = true;
+        numberOfTimesNotified++;
+    }
+
+    @Override
+    public void gotNotificationWhenSpaceAvailable() {
+        wasCalledWhenSpaceAgainAvailable = true;
+        numberOfTimesNotifiedWhenSpaceAvailable++;
     }
 }
 
@@ -32,6 +41,7 @@ public class ParkingLotExceptionTest {
         ParkingLot parkingLot = new ParkingLot(1, owner); //this represent available lots
 
         assertTrue(parkingLot.park(new Object()));
+        //assertDoesNotThrow(() -> parkingLot.park(new Object()));
     }
 
     @Test
@@ -101,5 +111,21 @@ public class ParkingLotExceptionTest {
         parkingLot.park(carTwo);
 
         assertTrue(dummyOwner.wasCalled);
+        assertEquals(1,dummyOwner.numberOfTimesNotified);
+    }
+
+    @Test
+    void givenParkingLot_WhenLotAvailable_thenShouldNotifyToOwner() throws SameVehicleIsAlreadyParkedException, ParkingLotFullException, CarNotParkedHereException {
+        DummyOwner dummyOwner = new DummyOwner();
+        ParkingLot parkingLot = new ParkingLot(2, dummyOwner);
+
+        Object carOne = new Object();
+        Object carTwo = new Object();
+        parkingLot.park(carOne);
+        parkingLot.park(carTwo);
+        parkingLot.unPark(carOne);
+
+        assertTrue(dummyOwner.wasCalledWhenSpaceAgainAvailable);
+        assertEquals(1,dummyOwner.numberOfTimesNotifiedWhenSpaceAvailable);
     }
 }
