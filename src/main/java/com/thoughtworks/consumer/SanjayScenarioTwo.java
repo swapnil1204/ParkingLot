@@ -1,6 +1,7 @@
 package com.thoughtworks.consumer;
 
-import com.thoughtworks.ParkingLotException;
+import com.thoughtworks.ParkingLotFullException;
+import com.thoughtworks.SameVehicleIsAlreadyParkedException;
 import com.thoughtworks.parkinglot.Owner;
 import com.thoughtworks.parkinglot.ParkingLot;
 
@@ -11,7 +12,7 @@ public class SanjayScenarioTwo{
         try {
             parkingLotOne.park(carOne);
             parkingLotOne.park(carOne);
-        } catch (ParkingLotException e) {
+        } catch (SameVehicleIsAlreadyParkedException | ParkingLotFullException e) {
             System.out.println(e);
         }
     }

@@ -1,7 +1,7 @@
 package com.thoughtworks.parkinglot;
 
 public class Owner {
-    String message; //TODO -  make it private
+    private String message;
 
     public String getNotification() {
         return message;

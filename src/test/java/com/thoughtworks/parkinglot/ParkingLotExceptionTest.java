@@ -1,13 +1,15 @@
 package com.thoughtworks.parkinglot;
 
-import com.thoughtworks.ParkingLotException;
+import com.thoughtworks.ParkingLotFullException;
+import com.thoughtworks.SameVehicleIsAlreadyParkedException;
+import com.thoughtworks.CarNotParkedHereException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ParkingLotExceptionTest<owner, Static> {
+public class ParkingLotExceptionTest {
 
     private static Owner owner;
 
@@ -17,40 +19,37 @@ public class ParkingLotExceptionTest<owner, Static> {
     }
 
     @Test
-    void givenParkingLotHasCapacity_WhenPark_ThenShouldPark() throws ParkingLotException {
+    void givenParkingLotHasCapacity_WhenPark_ThenShouldPark() throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
         ParkingLot parkingLot = new ParkingLot(1, owner); //this represent available lots
 
         assertTrue(parkingLot.park(new Object()));
     }
 
     @Test
-    void givenParkingLotIsFull_WhenPark_ThenShouldNotPark() throws ParkingLotException {
+    void givenParkingLotIsFull_WhenPark_ThenShouldNotPark() throws ParkingLotFullException, SameVehicleIsAlreadyParkedException {
         ParkingLot parkingLot = new ParkingLot(1, owner); // spaceAvailable = 1
         parkingLot.park(new Object()); // spaceAvailable - -
 
-        ParkingLotException exception = assertThrows(ParkingLotException.class, () -> {
+        ParkingLotFullException exception = assertThrows(ParkingLotFullException.class, () -> {
             parkingLot.park(new Object());
 
         });
-        assertEquals("parking lot is full", exception.getMessage());
     }
 
     @Test
-    void givenParkingLot_WhenParkingSameObjects_ThenShouldNotBeParked() throws ParkingLotException {
+    void givenParkingLot_WhenParkingSameObjects_ThenShouldNotBeParked() throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
         ParkingLot parkingLot = new ParkingLot(2, owner);
 
         Object object = new Object();
         parkingLot.park(object);
-        ParkingLotException exception = assertThrows(ParkingLotException.class, () -> {
+        SameVehicleIsAlreadyParkedException exception = assertThrows(SameVehicleIsAlreadyParkedException.class, () -> {
             parkingLot.park(object);
-
         });
 
-        assertEquals("You cannot park same vehicle", exception.getMessage());
     }
 
     @Test
-    void givenParkingLot_WhenUnParkAlreadyParkedCar_thenShouldBeAbleToUnPark() throws ParkingLotException {
+    void givenParkingLot_WhenUnParkAlreadyParkedCar_thenShouldBeAbleToUnPark() throws SameVehicleIsAlreadyParkedException, ParkingLotFullException, CarNotParkedHereException {
         ParkingLot parkingLot = new ParkingLot(2, owner);
         Object alreadyParkedCar = new Object();
         parkingLot.park(alreadyParkedCar);
@@ -59,21 +58,19 @@ public class ParkingLotExceptionTest<owner, Static> {
     }
 
     @Test
-    void givenParkingLot_WhenUnParkCarWhichIsNotParked_thenShouldNotBeAbleToUnPark() throws ParkingLotException {
+    void givenParkingLot_WhenUnParkCarWhichIsNotParked_thenShouldNotBeAbleToUnPark() throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
         ParkingLot parkingLot = new ParkingLot(2, owner);
         Object CarWhichIsNotParkedIn = new Object();
         Object CarWhichIsParked = new Object();
         parkingLot.park(CarWhichIsParked);
 
-        ParkingLotException exception = assertThrows(ParkingLotException.class, () -> {
+        CarNotParkedHereException exception = assertThrows(CarNotParkedHereException.class, () -> {
             parkingLot.unPark(CarWhichIsNotParkedIn);
         });
-
-        assertEquals("the car may not be parked here", exception.getMessage());
     }
 
     @Test
-    void givenParkingLot_WhenUnParkTwoCars_thenShouldBeAbleToUnPark() throws ParkingLotException {
+    void givenParkingLot_WhenUnParkTwoCars_thenShouldBeAbleToUnPark() throws SameVehicleIsAlreadyParkedException, ParkingLotFullException, CarNotParkedHereException {
         ParkingLot parkingLot = new ParkingLot(2, owner);
         Object carOne = new Object();
         Object carTwo = new Object();
@@ -85,7 +82,7 @@ public class ParkingLotExceptionTest<owner, Static> {
     }
 
     @Test
-    void givenParkingLot_WhenParkingLotIsFull_thenShouldNotifyToOwner() throws ParkingLotException {
+    void givenParkingLot_WhenParkingLotIsFull_thenShouldNotifyToOwner() throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
         ParkingLot parkingLot = new ParkingLot(2, owner);
 
         Object carOne = new Object();
