@@ -165,4 +165,18 @@ public class ParkingLotExceptionTest {
 
         assertEquals(1, securityGuard.numberOfTimesNotified);
     }
+
+    @Test
+    void givenParkingLot_WhenLotAvailable_thenShouldNotifyToSecurityGuard() throws Exception {
+        SecurityGuard securityGuard = new SecurityGuard();
+        ParkingLot parkingLot = new ParkingLot(2, securityGuard);
+        Object carOne = new Object();
+        Object carTwo = new Object();
+        parkingLot.park(carOne);
+        parkingLot.park(carTwo);
+
+        parkingLot.unPark(carOne);
+
+        assertEquals(1, securityGuard.numberOfTimesNotifiedWhenSpaceAvailable);
+    }
 }
