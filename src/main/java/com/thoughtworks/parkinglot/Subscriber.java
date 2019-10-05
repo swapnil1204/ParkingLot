@@ -1,7 +1,7 @@
 package com.thoughtworks.parkinglot;
 
 public interface Subscriber {
-    void gotNotification();
+    void gotNotificationWhenSpaceIsFull();
 
     void gotNotificationWhenSpaceAvailable();
 }

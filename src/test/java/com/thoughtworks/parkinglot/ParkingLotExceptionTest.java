@@ -12,7 +12,7 @@ class DummySubscriber implements Subscriber {
     int numberOfTimesNotifiedWhenSpaceAvailable = 0;
 
     @Override
-    public void gotNotification() {
+    public void gotNotificationWhenParkingLotIsFull() {
         numberOfTimesNotified++;
     }
 
@@ -27,7 +27,7 @@ class DummySecurityGuard implements Subscriber {
     int numberOfTimesNotifiedWhenSpaceAvailable = 0;
 
     @Override
-    public void gotNotification() {
+    public void gotNotificationWhenParkingLotIsFull() {
         numberOfTimesNotified++;
     }
 

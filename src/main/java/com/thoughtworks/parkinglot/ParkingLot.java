@@ -29,7 +29,7 @@ public class ParkingLot {
         }
         vehicles.add(object);
         if (isFull()) {
-            subscriber.gotNotification();
+            subscriber.gotNotificationWhenParkingLotIsFull();
         }
     }
 
