@@ -26,7 +26,7 @@ class DummyOwner implements Owner {
 //    }
 }
 
-class SecurityGuard implements Owner {
+class DummySecurityGuard implements Owner {
     int numberOfTimesNotified = 0;
     int numberOfTimesNotifiedWhenSpaceAvailable = 0;
 
@@ -155,21 +155,21 @@ public class ParkingLotExceptionTest {
 
     @Test
     void givenParkingLot_WhenParkingLotIsFull_thenShouldNotifyToSecurityGuard() throws Exception {
-        SecurityGuard securityGuard = new SecurityGuard();
-        ParkingLot parkingLot = new ParkingLot(2, securityGuard);
+        DummySecurityGuard dummySecurityGuard = new DummySecurityGuard();
+        ParkingLot parkingLot = new ParkingLot(2, dummySecurityGuard);
 
         Object carOne = new Object();
         Object carTwo = new Object();
         parkingLot.park(carOne);
         parkingLot.park(carTwo);
 
-        assertEquals(1, securityGuard.numberOfTimesNotified);
+        assertEquals(1, dummySecurityGuard.numberOfTimesNotified);
     }
 
     @Test
     void givenParkingLot_WhenLotAvailable_thenShouldNotifyToSecurityGuard() throws Exception {
-        SecurityGuard securityGuard = new SecurityGuard();
-        ParkingLot parkingLot = new ParkingLot(2, securityGuard);
+        DummySecurityGuard dummySecurityGuard = new DummySecurityGuard();
+        ParkingLot parkingLot = new ParkingLot(2, dummySecurityGuard);
         Object carOne = new Object();
         Object carTwo = new Object();
         parkingLot.park(carOne);
@@ -177,13 +177,13 @@ public class ParkingLotExceptionTest {
 
         parkingLot.unPark(carOne);
 
-        assertEquals(1, securityGuard.numberOfTimesNotifiedWhenSpaceAvailable);
+        assertEquals(1, dummySecurityGuard.numberOfTimesNotifiedWhenSpaceAvailable);
     }
 
     @Test
     void givenParkingLotIsFull_WhenUnparkTwice_thenShouldNotifyToSecurityGuardOnce() throws Exception {
-        DummyOwner dummyOwner = new DummyOwner();
-        ParkingLot parkingLot = new ParkingLot(2, dummyOwner);
+        DummySecurityGuard dummySecurityGuard = new DummySecurityGuard();
+        ParkingLot parkingLot = new ParkingLot(2, dummySecurityGuard);
         Object carOne = new Object();
         Object carTwo = new Object();
         parkingLot.park(carOne);
@@ -192,6 +192,6 @@ public class ParkingLotExceptionTest {
         parkingLot.unPark(carOne);
         parkingLot.unPark(carTwo);
 
-        assertEquals(1, dummyOwner.numberOfTimesNotifiedWhenSpaceAvailable);
+        assertEquals(1, dummySecurityGuard.numberOfTimesNotifiedWhenSpaceAvailable);
     }
 }
