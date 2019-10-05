@@ -11,7 +11,6 @@ public class ParkingLot {
 
     private Subscriber subscriber;
     private int capacity;
-    private int spaceAvailable;
 
     List<Object> vehicles = new ArrayList<>();
 
@@ -29,7 +28,7 @@ public class ParkingLot {
         }
         vehicles.add(object);
         if (isFull()) {
-            subscriber.gotNotificationWhenParkingLotIsFull();
+            subscriber.gotNotificationWhenSpaceIsFull();
         }
     }
 
