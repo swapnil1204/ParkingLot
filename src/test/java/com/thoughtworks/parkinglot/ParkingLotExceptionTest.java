@@ -4,6 +4,7 @@ import com.thoughtworks.ParkingLotFullException;
 import com.thoughtworks.SameVehicleIsAlreadyParkedException;
 import com.thoughtworks.CarNotParkedHereException;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,15 +31,9 @@ class DummyOwner implements Owner {
 
 public class ParkingLotExceptionTest {
 
-    private static DummyOwner dummyOwner;
-
-    @BeforeAll
-    static void setup() {
-        dummyOwner = new DummyOwner();
-    }
-
     @Test
     void givenParkingLotHasCapacity_WhenPark_ThenShouldPark() throws Exception {
+        DummyOwner dummyOwner = new DummyOwner();
         ParkingLot parkingLot = new ParkingLot(1, dummyOwner); //this represent available lots
 
         assertDoesNotThrow(() -> parkingLot.park(new Object()));
@@ -46,6 +41,7 @@ public class ParkingLotExceptionTest {
 
     @Test
     void givenParkingLotIsFull_WhenPark_ThenShouldNotPark() throws Exception {
+        DummyOwner dummyOwner = new DummyOwner();
         ParkingLot parkingLot = new ParkingLot(1, dummyOwner); // spaceAvailable = 1
         parkingLot.park(new Object()); // spaceAvailable - -
 
@@ -57,6 +53,7 @@ public class ParkingLotExceptionTest {
 
     @Test
     void givenParkingLot_WhenParkingSameObjects_ThenShouldNotBeParked() throws Exception {
+        DummyOwner dummyOwner = new DummyOwner();
         ParkingLot parkingLot = new ParkingLot(2, dummyOwner);
 
         Object object = new Object();
@@ -67,7 +64,8 @@ public class ParkingLotExceptionTest {
     }
 
     @Test
-    void givenParkingLot_WhenUnParkAlreadyParkedCar_thenShouldBeAbleToUnPark() throws Exception{
+    void givenParkingLot_WhenUnParkAlreadyParkedCar_thenShouldBeAbleToUnPark() throws Exception {
+        DummyOwner dummyOwner = new DummyOwner();
         ParkingLot parkingLot = new ParkingLot(2, dummyOwner);
         Object alreadyParkedCar = new Object();
         parkingLot.park(alreadyParkedCar);
@@ -77,6 +75,7 @@ public class ParkingLotExceptionTest {
 
     @Test
     void givenParkingLot_WhenUnParkCarWhichIsNotParked_thenShouldNotBeAbleToUnPark() throws Exception {
+        DummyOwner dummyOwner = new DummyOwner();
         ParkingLot parkingLot = new ParkingLot(2, dummyOwner);
         Object CarWhichIsNotParkedIn = new Object();
         Object CarWhichIsParked = new Object();
@@ -89,6 +88,7 @@ public class ParkingLotExceptionTest {
 
     @Test
     void givenParkingLot_WhenUnParkTwoCars_thenShouldBeAbleToUnPark() throws Exception {
+        DummyOwner dummyOwner = new DummyOwner();
         ParkingLot parkingLot = new ParkingLot(2, dummyOwner);
         Object carOne = new Object();
         Object carTwo = new Object();
@@ -101,6 +101,7 @@ public class ParkingLotExceptionTest {
 
     @Test
     void givenParkingLot_WhenParkingLotIsFull_thenShouldNotifyToOwner() throws Exception {
+        DummyOwner dummyOwner = new DummyOwner();
         ParkingLot parkingLot = new ParkingLot(2, dummyOwner);
 
         Object carOne = new Object();
@@ -113,13 +114,29 @@ public class ParkingLotExceptionTest {
 
     @Test
     void givenParkingLot_WhenLotAvailable_thenShouldNotifyToOwner() throws Exception {
+        DummyOwner dummyOwner = new DummyOwner();
         ParkingLot parkingLot = new ParkingLot(2, dummyOwner);
-
         Object carOne = new Object();
         Object carTwo = new Object();
         parkingLot.park(carOne);
         parkingLot.park(carTwo);
+
         parkingLot.unPark(carOne);
+
+        assertEquals(1, dummyOwner.numberOfTimesNotifiedWhenSpaceAvailable);
+    }
+
+    @Test
+    void givenParkingLotIsFull_WhenUnparkTwice_thenShouldNotifyToOwnerOnce() throws Exception {
+        DummyOwner dummyOwner = new DummyOwner();
+        ParkingLot parkingLot = new ParkingLot(2, dummyOwner);
+        Object carOne = new Object();
+        Object carTwo = new Object();
+        parkingLot.park(carOne);
+        parkingLot.park(carTwo);
+
+        parkingLot.unPark(carOne);
+        parkingLot.unPark(carTwo);
 
         assertEquals(1, dummyOwner.numberOfTimesNotifiedWhenSpaceAvailable);
     }
