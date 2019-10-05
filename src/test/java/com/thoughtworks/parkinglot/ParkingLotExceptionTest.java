@@ -22,9 +22,9 @@ class DummyOwner implements Owner {
         numberOfTimesNotifiedWhenSpaceAvailable++;
     }
 
-    public boolean wasNotifiedAboutFullSpaceOnce() {
-        return numberOfTimesNotified == 1;
-    }
+//    public boolean wasNotifiedAboutFullSpaceOnce() {
+//        return numberOfTimesNotified == 1;
+//    }
 
 }
 
@@ -38,14 +38,14 @@ public class ParkingLotExceptionTest {
     }
 
     @Test
-    void givenParkingLotHasCapacity_WhenPark_ThenShouldPark() throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
+    void givenParkingLotHasCapacity_WhenPark_ThenShouldPark() throws Exception {
         ParkingLot parkingLot = new ParkingLot(1, dummyOwner); //this represent available lots
 
         assertDoesNotThrow(() -> parkingLot.park(new Object()));
     }
 
     @Test
-    void givenParkingLotIsFull_WhenPark_ThenShouldNotPark() throws ParkingLotFullException, SameVehicleIsAlreadyParkedException {
+    void givenParkingLotIsFull_WhenPark_ThenShouldNotPark() throws Exception {
         ParkingLot parkingLot = new ParkingLot(1, dummyOwner); // spaceAvailable = 1
         parkingLot.park(new Object()); // spaceAvailable - -
 
@@ -56,7 +56,7 @@ public class ParkingLotExceptionTest {
     }
 
     @Test
-    void givenParkingLot_WhenParkingSameObjects_ThenShouldNotBeParked() throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
+    void givenParkingLot_WhenParkingSameObjects_ThenShouldNotBeParked() throws Exception {
         ParkingLot parkingLot = new ParkingLot(2, dummyOwner);
 
         Object object = new Object();
@@ -67,7 +67,7 @@ public class ParkingLotExceptionTest {
     }
 
     @Test
-    void givenParkingLot_WhenUnParkAlreadyParkedCar_thenShouldBeAbleToUnPark() throws SameVehicleIsAlreadyParkedException, ParkingLotFullException, CarNotParkedHereException {
+    void givenParkingLot_WhenUnParkAlreadyParkedCar_thenShouldBeAbleToUnPark() throws Exception{
         ParkingLot parkingLot = new ParkingLot(2, dummyOwner);
         Object alreadyParkedCar = new Object();
         parkingLot.park(alreadyParkedCar);
@@ -76,7 +76,7 @@ public class ParkingLotExceptionTest {
     }
 
     @Test
-    void givenParkingLot_WhenUnParkCarWhichIsNotParked_thenShouldNotBeAbleToUnPark() throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
+    void givenParkingLot_WhenUnParkCarWhichIsNotParked_thenShouldNotBeAbleToUnPark() throws Exception {
         ParkingLot parkingLot = new ParkingLot(2, dummyOwner);
         Object CarWhichIsNotParkedIn = new Object();
         Object CarWhichIsParked = new Object();
@@ -88,7 +88,7 @@ public class ParkingLotExceptionTest {
     }
 
     @Test
-    void givenParkingLot_WhenUnParkTwoCars_thenShouldBeAbleToUnPark() throws SameVehicleIsAlreadyParkedException, ParkingLotFullException, CarNotParkedHereException {
+    void givenParkingLot_WhenUnParkTwoCars_thenShouldBeAbleToUnPark() throws Exception {
         ParkingLot parkingLot = new ParkingLot(2, dummyOwner);
         Object carOne = new Object();
         Object carTwo = new Object();
@@ -100,7 +100,7 @@ public class ParkingLotExceptionTest {
     }
 
     @Test
-    void givenParkingLot_WhenParkingLotIsFull_thenShouldNotifyToOwner() throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
+    void givenParkingLot_WhenParkingLotIsFull_thenShouldNotifyToOwner() throws Exception {
         ParkingLot parkingLot = new ParkingLot(2, dummyOwner);
 
         Object carOne = new Object();
@@ -108,11 +108,11 @@ public class ParkingLotExceptionTest {
         parkingLot.park(carOne);
         parkingLot.park(carTwo);
 
-        assertEquals(1,dummyOwner.numberOfTimesNotified);
+        assertEquals(1, dummyOwner.numberOfTimesNotified);
     }
 
     @Test
-    void givenParkingLot_WhenLotAvailable_thenShouldNotifyToOwner() throws SameVehicleIsAlreadyParkedException, ParkingLotFullException, CarNotParkedHereException {
+    void givenParkingLot_WhenLotAvailable_thenShouldNotifyToOwner() throws Exception {
         ParkingLot parkingLot = new ParkingLot(2, dummyOwner);
 
         Object carOne = new Object();
@@ -121,6 +121,6 @@ public class ParkingLotExceptionTest {
         parkingLot.park(carTwo);
         parkingLot.unPark(carOne);
 
-        assertEquals(1,dummyOwner.numberOfTimesNotifiedWhenSpaceAvailable);
+        assertEquals(1, dummyOwner.numberOfTimesNotifiedWhenSpaceAvailable);
     }
 }
