@@ -11,12 +11,13 @@ public class ParkingLot {
 
     private Subscriber subscriber;
     private int capacity;
+    private List observer;
 
     List<Object> vehicles = new ArrayList<>();
 
-    public ParkingLot(int capacity, Subscriber subscriber) {
+    public ParkingLot(int capacity, List observer) {
         this.capacity = capacity;
-        this.subscriber = subscriber;
+        this.observer = observer;
     }
 
     public void park(Object object) throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
@@ -28,7 +29,12 @@ public class ParkingLot {
         }
         vehicles.add(object);
         if (isFull()) {
-            subscriber.gotNotificationWhenSpaceIsFull();
+            for (int i = 0; i < observer.size(); i++) {
+                Subscriber subscriber = (Subscriber) observer.get(i);
+                if (subscriber != null) {
+                    subscriber.gotNotificationWhenSpaceIsFull();
+                }
+            }
         }
     }
 
@@ -56,7 +62,12 @@ public class ParkingLot {
                 return car;
             }
             vehicles.remove(car);
-            subscriber.gotNotificationWhenSpaceAvailable();
+            for (int i = 0; i < observer.size(); i++) {
+                Subscriber subscriber = (Subscriber) observer.get(i);
+                if (subscriber != null) {
+                    subscriber.gotNotificationWhenSpaceAvailable();
+                }
+            }
             return car;
         }
         throw new CarNotParkedHereException();
