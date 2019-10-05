@@ -179,4 +179,19 @@ public class ParkingLotExceptionTest {
 
         assertEquals(1, securityGuard.numberOfTimesNotifiedWhenSpaceAvailable);
     }
+
+    @Test
+    void givenParkingLotIsFull_WhenUnparkTwice_thenShouldNotifyToSecurityGuardOnce() throws Exception {
+        DummyOwner dummyOwner = new DummyOwner();
+        ParkingLot parkingLot = new ParkingLot(2, dummyOwner);
+        Object carOne = new Object();
+        Object carTwo = new Object();
+        parkingLot.park(carOne);
+        parkingLot.park(carTwo);
+
+        parkingLot.unPark(carOne);
+        parkingLot.unPark(carTwo);
+
+        assertEquals(1, dummyOwner.numberOfTimesNotifiedWhenSpaceAvailable);
+    }
 }
