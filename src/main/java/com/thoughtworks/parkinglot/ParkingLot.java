@@ -28,20 +28,13 @@ public class ParkingLot {
         }
         vehicles.add(object);
         if (isFull()) {
-            for (int i = 0; i < subscribers.size(); i++) {
-                Subscriber subscriber = subscribers.get(i);
-                    subscriber.gotNotificationWhenSpaceIsFull();
+            for (Subscriber subscriber : subscribers) {
+                subscriber.gotNotificationWhenSpaceIsFull();
             }
         }
     }
 
     private boolean isVehicleAvailable(Object object) {
-        if (object == null) {
-
-        }
-        if (vehicles == null) {
-
-        }
         return vehicles.contains(object);
     }
 
@@ -64,9 +57,8 @@ public class ParkingLot {
                 return car;
             }
             vehicles.remove(car);
-            for (int i = 0; i < subscribers.size(); i++) {
-                Subscriber subscriber = subscribers.get(i);
-                    subscriber.gotNotificationWhenSpaceAvailable();
+            for (Subscriber subscriber : subscribers) {
+                subscriber.gotNotificationWhenSpaceAvailable();
             }
             return car;
         }

@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ParkingLotExceptionTest {
+public class ParkingLotTest {
 
     @Test
     void givenParkingLotHasCapacity_WhenPark_ThenShouldPark() throws Exception {
