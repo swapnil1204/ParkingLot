@@ -3,8 +3,6 @@ package com.thoughtworks.parkinglot;
 import com.thoughtworks.ParkingLotFullException;
 import com.thoughtworks.SameVehicleIsAlreadyParkedException;
 import com.thoughtworks.CarNotParkedHereException;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,7 +24,21 @@ class DummyOwner implements Owner {
 //    public boolean wasNotifiedAboutFullSpaceOnce() {
 //        return numberOfTimesNotified == 1;
 //    }
+}
 
+class SecurityGuard implements Owner {
+    int numberOfTimesNotified = 0;
+    int numberOfTimesNotifiedWhenSpaceAvailable = 0;
+
+    @Override
+    public void gotNotification() {
+        numberOfTimesNotified++;
+    }
+
+    @Override
+    public void gotNotificationWhenSpaceAvailable() {
+        numberOfTimesNotifiedWhenSpaceAvailable++;
+    }
 }
 
 public class ParkingLotExceptionTest {
@@ -139,5 +151,18 @@ public class ParkingLotExceptionTest {
         parkingLot.unPark(carTwo);
 
         assertEquals(1, dummyOwner.numberOfTimesNotifiedWhenSpaceAvailable);
+    }
+
+    @Test
+    void givenParkingLot_WhenParkingLotIsFull_thenShouldNotifyToSecurityGuard() throws Exception {
+        SecurityGuard securityGuard = new SecurityGuard();
+        ParkingLot parkingLot = new ParkingLot(2, securityGuard);
+
+        Object carOne = new Object();
+        Object carTwo = new Object();
+        parkingLot.park(carOne);
+        parkingLot.park(carTwo);
+
+        assertEquals(1, securityGuard.numberOfTimesNotified);
     }
 }
