@@ -9,15 +9,15 @@ import java.util.List;
 
 public class ParkingLot {
 
-    private Owner owner;
+    private Subscriber subscriber;
     private int capacity;
     private int spaceAvailable;
 
     List<Object> vehicles = new ArrayList<>();
 
-    public ParkingLot(int capacity, Owner owner) {
+    public ParkingLot(int capacity, Subscriber subscriber) {
         this.capacity = capacity;
-        this.owner = owner;
+        this.subscriber = subscriber;
     }
 
     public void park(Object object) throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
@@ -29,7 +29,7 @@ public class ParkingLot {
         }
         vehicles.add(object);
         if (isFull()) {
-            owner.gotNotification();
+            subscriber.gotNotification();
         }
     }
 
@@ -57,7 +57,7 @@ public class ParkingLot {
                 return car;
             }
             vehicles.remove(car);
-            owner.gotNotificationWhenSpaceAvailable();
+            subscriber.gotNotificationWhenSpaceAvailable();
             return car;
         }
         throw new CarNotParkedHereException();

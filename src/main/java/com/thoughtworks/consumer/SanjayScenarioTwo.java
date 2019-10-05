@@ -2,7 +2,6 @@ package com.thoughtworks.consumer;
 
 import com.thoughtworks.ParkingLotFullException;
 import com.thoughtworks.SameVehicleIsAlreadyParkedException;
-import com.thoughtworks.parkinglot.Owner;
 import com.thoughtworks.parkinglot.ParkingLot;
 
 public class SanjayScenarioTwo{

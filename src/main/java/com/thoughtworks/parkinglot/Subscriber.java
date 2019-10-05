@@ -1,6 +1,6 @@
 package com.thoughtworks.parkinglot;
 
-public interface Owner {
+public interface Subscriber {
     void gotNotification();
 
     void gotNotificationWhenSpaceAvailable();
