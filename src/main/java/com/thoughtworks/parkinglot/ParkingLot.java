@@ -9,15 +9,14 @@ import java.util.List;
 
 public class ParkingLot {
 
-    private Subscriber subscriber;
     private int capacity;
-    private List observer;
+    private List<Subscriber> subscribers;
 
     private List<Object> vehicles = new ArrayList<>();
 
-    public ParkingLot(int capacity, List observer) {
+    public ParkingLot(int capacity, List<Subscriber> subscribers) {
         this.capacity = capacity;
-        this.observer = observer;
+        this.subscribers = subscribers;
     }
 
     public void park(Object object) throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
@@ -29,17 +28,20 @@ public class ParkingLot {
         }
         vehicles.add(object);
         if (isFull()) {
-            for (int i = 0; i < observer.size(); i++) {
-                Subscriber subscriber = (Subscriber) observer.get(i);
-                if (subscriber != null) {
+            for (int i = 0; i < subscribers.size(); i++) {
+                Subscriber subscriber = subscribers.get(i);
                     subscriber.gotNotificationWhenSpaceIsFull();
-                }
             }
         }
     }
 
-
     private boolean isVehicleAvailable(Object object) {
+        if (object == null) {
+
+        }
+        if (vehicles == null) {
+
+        }
         return vehicles.contains(object);
     }
 
@@ -62,11 +64,9 @@ public class ParkingLot {
                 return car;
             }
             vehicles.remove(car);
-            for (int i = 0; i < observer.size(); i++) {
-                Subscriber subscriber = (Subscriber) observer.get(i);
-                if (subscriber != null) {
+            for (int i = 0; i < subscribers.size(); i++) {
+                Subscriber subscriber = subscribers.get(i);
                     subscriber.gotNotificationWhenSpaceAvailable();
-                }
             }
             return car;
         }
