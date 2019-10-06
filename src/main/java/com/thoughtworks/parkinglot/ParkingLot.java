@@ -57,9 +57,7 @@ public class ParkingLot {
                 return car;
             }
             vehicles.remove(car);
-            for (Subscriber subscriber : subscribers) {
-                subscriber.gotNotificationWhenSpaceAvailable();
-            }
+            for (Subscriber subscriber : subscribers) subscriber.gotNotificationWhenSpaceAvailable();
             return car;
         }
         throw new CarNotParkedHereException();
