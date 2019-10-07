@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
 
-//    private List<Object> Subscribers = new ArrayList<>();
 
     @Test
     void givenParkingLotHasCapacity_WhenPark_ThenShouldPark() throws Exception {
@@ -210,33 +209,33 @@ public class ParkingLotTest {
     @Test
     void givenParkingLot_WhenIsFull_thenShouldNotifyToAllIncludingNewSubscriber() throws Exception {
         DummyOwner dummyOwner = new DummyOwner();
-        List<Subscriber> subscriber =new ArrayList<>();
+        List<Subscriber> subscriber = new ArrayList<>();
         subscriber.add(dummyOwner);
-        ParkingLot parkingLot =new ParkingLot(1,subscriber);
+        ParkingLot parkingLot = new ParkingLot(1, subscriber);
         Object vehicle = new Object();
 
         NewSubscriber newSubscriber = new NewSubscriber();
         parkingLot.Add(newSubscriber);
         parkingLot.park(vehicle);
 
-        assertEquals(1,dummyOwner.numberOfTimesNotifiedWhenParkingLotIsFull);
-        assertEquals(1,newSubscriber.numberOfTimesNotifiedWhenParkingLotIsFull);
+        assertEquals(1, dummyOwner.numberOfTimesNotifiedWhenParkingLotIsFull);
+        assertEquals(1, newSubscriber.numberOfTimesNotifiedWhenParkingLotIsFull);
     }
 
     @Test
     void givenParkingLot_WhenIsFull_ThenShouldNotifyToAllExcludingUnsubscriber() throws Exception {
         DummyOwner dummyOwner = new DummyOwner();
         NewSubscriber newSubscriber = new NewSubscriber();
-        List<Subscriber> subscriber =new ArrayList<>();
+        List<Subscriber> subscriber = new ArrayList<>();
         subscriber.add(dummyOwner);
         subscriber.add(newSubscriber);
-        ParkingLot parkingLot =new ParkingLot(1,subscriber);
+        ParkingLot parkingLot = new ParkingLot(1, subscriber);
         Object vehicle = new Object();
 
         parkingLot.remove(newSubscriber);
         parkingLot.park(vehicle);
 
-        assertEquals(1,dummyOwner.numberOfTimesNotifiedWhenParkingLotIsFull);
-        assertEquals(0,newSubscriber.numberOfTimesNotifiedWhenParkingLotIsFull);
+        assertEquals(1, dummyOwner.numberOfTimesNotifiedWhenParkingLotIsFull);
+        assertEquals(0, newSubscriber.numberOfTimesNotifiedWhenParkingLotIsFull);
     }
 }
