@@ -208,7 +208,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void givenParkingLot_WhenParkingLotIsFull_thenShouldNotifyToAllSubscriberWithNewSubscriber() throws Exception {
+    void givenParkingLot_WhenIsFull_thenShouldNotifyToAllIncludingNewSubscriber() throws Exception {
         DummyOwner dummyOwner = new DummyOwner();
         List<Subscriber> subscriber =new ArrayList<>();
         subscriber.add(dummyOwner);
@@ -224,7 +224,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void givenParkingLot_WhenParkingLotIsFull_ThenShouldNotifyToAllExcludingUnsubscriber() throws Exception {
+    void givenParkingLot_WhenIsFull_ThenShouldNotifyToAllExcludingUnsubscriber() throws Exception {
         DummyOwner dummyOwner = new DummyOwner();
         NewSubscriber newSubscriber = new NewSubscriber();
         List<Subscriber> subscriber =new ArrayList<>();
