@@ -64,10 +64,14 @@ public class ParkingLot {
                 return car;
             }
             vehicles.remove(car);
-            for (Subscriber subscriber : subscribers) subscriber.gotNotificationWhenSpaceAvailable();
+            sendNotificationToAllExistingSubscribersWhenSpaceIsAvailable();
             return car;
         }
         throw new CarNotParkedHereException();
+    }
+
+    private void sendNotificationToAllExistingSubscribersWhenSpaceIsAvailable() {
+        for (Subscriber subscriber : subscribers) subscriber.gotNotificationWhenSpaceAvailable();
     }
 
     public void add(Subscriber subscribers) {
