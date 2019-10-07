@@ -223,4 +223,20 @@ public class ParkingLotTest {
         assertEquals(1,newSubscriber.numberOfTimesNotifiedWhenParkingLotIsFull);
     }
 
+    @Test
+    void givenParkingLot_WhenParkingLotIsFull_ThenShouldNotifyToAllExcludingUnsubscriber() throws Exception {
+        DummyOwner dummyOwner = new DummyOwner();
+        NewSubscriber newSubscriber = new NewSubscriber();
+        List<Subscriber> subscriber =new ArrayList<>();
+        subscriber.add(dummyOwner);
+        subscriber.add(newSubscriber);
+        ParkingLot parkingLot =new ParkingLot(1,subscriber);
+        Object vehicle = new Object();
+
+        parkingLot.remove(newSubscriber);
+        parkingLot.park(vehicle);
+
+        assertEquals(1,dummyOwner.numberOfTimesNotifiedWhenParkingLotIsFull);
+        assertEquals(0,newSubscriber.numberOfTimesNotifiedWhenParkingLotIsFull);
+    }
 }

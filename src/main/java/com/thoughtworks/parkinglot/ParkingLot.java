@@ -66,4 +66,8 @@ public class ParkingLot {
     public void Add(Subscriber subscribers) {
         this.subscribers.add(subscribers);
     }
+
+    public void remove(Subscriber subscribers) {
+        this.subscribers.remove(subscribers);
+    }
 }
