@@ -20,7 +20,7 @@ public class ParkingLot {
     }
 
     public void park(Object object) throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
-        if (!(vehicles.size() < capacity)) {
+        if (!isOutOfCapacity()) {
             throw new ParkingLotFullException();
         }
         if (isVehicleAlreadyParked(object)) {
@@ -32,6 +32,10 @@ public class ParkingLot {
                 subscriber.gotNotificationWhenSpaceIsFull();
             }
         }
+    }
+
+    private boolean isOutOfCapacity() {
+        return vehicles.size() < capacity;
     }
 
     private boolean isVehicleAlreadyParked(Object object) {
