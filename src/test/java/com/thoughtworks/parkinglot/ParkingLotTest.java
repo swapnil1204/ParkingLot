@@ -208,7 +208,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void givenParkingLot_WhenParkingLotIsFull_thenShouldNotifyToAllSubscriber() throws Exception {
+    void givenParkingLot_WhenParkingLotIsFull_thenShouldNotifyToAllSubscriberWithNewSubscriber() throws Exception {
         DummyOwner dummyOwner = new DummyOwner();
         List<Subscriber> subscriber =new ArrayList<>();
         subscriber.add(dummyOwner);
@@ -222,4 +222,5 @@ public class ParkingLotTest {
         assertEquals(1,dummyOwner.numberOfTimesNotifiedWhenParkingLotIsFull);
         assertEquals(1,newSubscriber.numberOfTimesNotifiedWhenParkingLotIsFull);
     }
+
 }
