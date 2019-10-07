@@ -23,25 +23,24 @@ public class ParkingLot {
         if (!(vehicles.size() < capacity)) {
             throw new ParkingLotFullException();
         }
-        if (isVehicleAvailable(object)) {
+        if (isVehicleAlreadyParked(object)) {
             throw new SameVehicleIsAlreadyParkedException();
         }
         vehicles.add(object);
-        if (isFull()) {
+        if (IsFull()) {
             for (Subscriber subscriber : subscribers) {
                 subscriber.gotNotificationWhenSpaceIsFull();
             }
         }
     }
 
-    private boolean isVehicleAvailable(Object object) {
+    private boolean isVehicleAlreadyParked(Object object) {
         return vehicles.contains(object);
     }
 
-    private boolean isFull() {
+    private boolean IsFull() {
         return vehicles.size() == capacity;
     }
-
 
     @Override
     public String toString() {
@@ -51,8 +50,8 @@ public class ParkingLot {
     }
 
     public Object unPark(Object car) throws CarNotParkedHereException {
-        if (isVehicleAvailable(car)) {
-            if (!isFull()) {
+        if (isVehicleAlreadyParked(car)) {
+            if (!IsFull()) {
                 vehicles.remove(car);
                 return car;
             }
