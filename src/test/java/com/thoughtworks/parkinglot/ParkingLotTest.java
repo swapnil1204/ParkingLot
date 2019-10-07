@@ -3,11 +3,15 @@ package com.thoughtworks.parkinglot;
 import com.thoughtworks.CarNotParkedHereException;
 import com.thoughtworks.ParkingLotFullException;
 import com.thoughtworks.SameVehicleIsAlreadyParkedException;
+import com.thoughtworks.parkinglot.dummy.DummyOwner;
+import com.thoughtworks.parkinglot.dummy.DummySecurityGuard;
+import com.thoughtworks.parkinglot.dummy.NewSubscriber;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
@@ -226,9 +230,7 @@ public class ParkingLotTest {
     void givenParkingLot_WhenIsFull_ThenShouldNotifyToAllExcludingUnsubscriber() throws Exception {
         DummyOwner dummyOwner = new DummyOwner();
         NewSubscriber newSubscriber = new NewSubscriber();
-        List<Subscriber> subscriber = new ArrayList<>();
-        subscriber.add(dummyOwner);
-        subscriber.add(newSubscriber);
+        List<Subscriber> subscriber = new ArrayList<>(asList(dummyOwner, newSubscriber));
         ParkingLot parkingLot = new ParkingLot(1, subscriber);
         Object vehicle = new Object();
 
