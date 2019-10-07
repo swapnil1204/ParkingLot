@@ -81,4 +81,8 @@ public class ParkingLot {
     public void remove(Subscriber subscribers) {
         this.subscribers.remove(subscribers);
     }
+
+    public int getCapacity(){
+        return this.capacity;
+    }
 }
