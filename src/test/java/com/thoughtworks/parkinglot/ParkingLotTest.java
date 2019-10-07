@@ -219,7 +219,7 @@ public class ParkingLotTest {
         Object vehicle = new Object();
 
         NewSubscriber newSubscriber = new NewSubscriber();
-        parkingLot.Add(newSubscriber);
+        parkingLot.add(newSubscriber);
         parkingLot.park(vehicle);
 
         assertEquals(1, dummyOwner.numberOfTimesNotifiedWhenParkingLotIsFull);
