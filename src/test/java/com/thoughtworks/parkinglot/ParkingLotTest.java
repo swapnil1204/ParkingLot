@@ -31,7 +31,7 @@ public class ParkingLotTest {
         ParkingLot parkingLot = new ParkingLot(1, subscribers); // spaceAvailable = 1
         parkingLot.park(new Object()); // spaceAvailable - -
 
-        ParkingLotFullException exception = assertThrows(ParkingLotFullException.class, () -> {
+        assertThrows(ParkingLotFullException.class, () -> {
             parkingLot.park(new Object());
 
         });
@@ -46,7 +46,7 @@ public class ParkingLotTest {
 
         Object object = new Object();
         parkingLot.park(object);
-        SameVehicleIsAlreadyParkedException exception = assertThrows(SameVehicleIsAlreadyParkedException.class, () -> {
+        assertThrows(SameVehicleIsAlreadyParkedException.class, () -> {
             parkingLot.park(object);
         });
     }
@@ -73,7 +73,7 @@ public class ParkingLotTest {
         Object CarWhichIsParked = new Object();
         parkingLot.park(CarWhichIsParked);
 
-        CarNotParkedHereException exception = assertThrows(CarNotParkedHereException.class, () -> {
+        assertThrows(CarNotParkedHereException.class, () -> {
             parkingLot.unPark(CarWhichIsNotParkedIn);
         });
     }
