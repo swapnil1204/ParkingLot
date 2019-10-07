@@ -1,15 +1,17 @@
 package com.thoughtworks.parkinglot.dummy;
 
 public class DummyFactory {
-    public static DummyOwner getDummyOwner() {
-        return new DummyOwner();
+
+    public static DummySubscriber getDummyOwner() {
+        return new DummySubscriber();
     }
 
-    public static DummySecurityGuard getDummySecurityGuard() {
-        return new DummySecurityGuard();
+    public static DummySubscriber getDummySecurityGuard() {
+        return new DummySubscriber();
     }
 
-    public static NewSubscriber getNewSubscriber() {
-        return new NewSubscriber();
+    public static DummySubscriber getNewSubscriber() {
+        return new DummySubscriber();
     }
+
 }
