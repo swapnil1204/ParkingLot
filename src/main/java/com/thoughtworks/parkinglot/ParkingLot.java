@@ -28,9 +28,13 @@ public class ParkingLot {
         }
         vehicles.add(object);
         if (IsFull()) {
-            for (Subscriber subscriber : subscribers) {
-                subscriber.gotNotificationWhenSpaceIsFull();
-            }
+            sendNotificationToAllExistingSubscribersWhenParkingLotIsFull();
+        }
+    }
+
+    private void sendNotificationToAllExistingSubscribersWhenParkingLotIsFull() {
+        for (Subscriber subscriber : subscribers) {
+            subscriber.gotNotificationWhenSpaceIsFull();
         }
     }
 
