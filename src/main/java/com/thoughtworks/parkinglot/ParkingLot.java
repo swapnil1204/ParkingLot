@@ -62,4 +62,8 @@ public class ParkingLot {
         }
         throw new CarNotParkedHereException();
     }
+
+    public void Add(Subscriber subscribers) {
+        this.subscribers.add(subscribers);
+    }
 }
