@@ -3,7 +3,6 @@ package com.thoughtworks.parkinglot;
 import com.thoughtworks.CarNotParkedHereException;
 import com.thoughtworks.ParkingLotFullException;
 import com.thoughtworks.SameVehicleIsAlreadyParkedException;
-import org.assertj.core.api.ListAssert;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -107,7 +106,7 @@ public class ParkingLotTest {
         parkingLot.park(carOne);
         parkingLot.park(carTwo);
 
-        assertEquals(1, dummyOwner.numberOfTimesNotified);
+        assertEquals(1, dummyOwner.numberOfTimesNotifiedWhenParkingLotIsFull);
     }
 
     @Test
@@ -155,7 +154,7 @@ public class ParkingLotTest {
         parkingLot.park(carOne);
         parkingLot.park(carTwo);
 
-        assertEquals(1, dummySecurityGuard.numberOfTimesNotified);
+        assertEquals(1, dummySecurityGuard.numberOfTimesNotifiedWhenParkingLotIsFull);
     }
 
     @Test
@@ -204,8 +203,8 @@ public class ParkingLotTest {
         parkingLot.park(carOne);
         parkingLot.park(carTwo);
 
-        assertEquals(1, dummyOwner.numberOfTimesNotified);
-        assertEquals(1, dummySecurityGuard.numberOfTimesNotified);
+        assertEquals(1, dummyOwner.numberOfTimesNotifiedWhenParkingLotIsFull);
+        assertEquals(1, dummySecurityGuard.numberOfTimesNotifiedWhenParkingLotIsFull);
     }
 
     @Test
@@ -220,7 +219,7 @@ public class ParkingLotTest {
         parkingLot.Add(newSubscriber);
         parkingLot.park(vehicle);
 
-        assertEquals(1,dummyOwner.numberOfTimesNotified);
-        assertEquals(1,newSubscriber.numberOfTimesNotified);
+        assertEquals(1,dummyOwner.numberOfTimesNotifiedWhenParkingLotIsFull);
+        assertEquals(1,newSubscriber.numberOfTimesNotifiedWhenParkingLotIsFull);
     }
 }
