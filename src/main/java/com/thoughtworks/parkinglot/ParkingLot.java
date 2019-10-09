@@ -7,7 +7,7 @@ import com.thoughtworks.CarNotParkedHereException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParkingLot {
+public class ParkingLot implements Comparable<ParkingLot> {
 
     private int capacity;
     private List<Subscriber> subscribers;
@@ -27,7 +27,7 @@ public class ParkingLot {
             throw new SameVehicleIsAlreadyParkedException();
         }
         vehicles.add(object);
-        if (IsFull()) {
+        if (isFull()) {
             sendNotificationToAllExistingSubscribersWhenParkingLotIsFull();
         }
     }
@@ -46,7 +46,7 @@ public class ParkingLot {
         return vehicles.contains(object);
     }
 
-    public boolean IsFull() {
+    private boolean isFull() {
         return vehicles.size() == capacity;
     }
 
@@ -59,7 +59,7 @@ public class ParkingLot {
 
     public Object unPark(Object car) throws CarNotParkedHereException {
         if (isVehicleAlreadyParked(car)) {
-            if (!IsFull()) {
+            if (!isFull()) {
                 vehicles.remove(car);
                 return car;
             }
@@ -82,7 +82,14 @@ public class ParkingLot {
         this.subscribers.remove(subscribers);
     }
 
-    public int getCapacity(){
+    public int getCapacity() {
         return this.capacity;
     }
+
+
+    @Override
+    public int compareTo(ParkingLot o) {
+        return this.capacity - o.capacity;
+    }
+
 }
