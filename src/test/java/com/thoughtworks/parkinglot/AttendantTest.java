@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static java.util.List.of;
@@ -24,7 +23,6 @@ class AttendantTest {
     void givenOneParkingLot_WhenPark_ThenShouldParkVehicleInGivenParkingLot() {
         ParkingLot parkingLotWithCapacityOne = new ParkingLot(1, subscribers);
         List<ParkingLot> parkingLots = of(parkingLotWithCapacityOne);
-        //List<ParkingLot> parkingLots = new ArrayList<>(Collections.singleton(parkingLotWithCapacityOne));
         Attendant attendant = new Attendant(parkingLots);
         Object vehicle = new Object();
 
@@ -70,10 +68,40 @@ class AttendantTest {
         attendant.park(vehicleOne);
         attendant.park(vehicleTwo);
         attendant.park(vehicleThree);
-
         attendant.park(vehicleFour);
 
+        assertEquals(vehicleOne, parkingLotWithCapacityThree.unPark(vehicleOne));
+        assertEquals(vehicleTwo, parkingLotWithCapacityThree.unPark(vehicleTwo));
+        assertEquals(vehicleThree, parkingLotWithCapacityThree.unPark(vehicleThree));
         assertEquals(vehicleFour, parkingLotWithCapacityTwo.unPark(vehicleFour));
     }
+
+    @Test
+    void givenThreeParkingLot_WhenMaximumCapacityParkingLotIsFull_ThenShouldParkTheVehicleInRemainingMaximumCapacityParkingLot() throws Exception {//TODO
+        ParkingLot parkingLotWithCapacityOne = new ParkingLot(1, subscribers);
+        ParkingLot parkingLotWithCapacityTwo = new ParkingLot(2, subscribers);
+        ParkingLot parkingLotWithCapacityThree = new ParkingLot(3, subscribers);
+        List<ParkingLot> parkingLots = of(parkingLotWithCapacityTwo, parkingLotWithCapacityThree,parkingLotWithCapacityOne);
+
+        Attendant attendant = new Attendant(parkingLots);
+        Object vehicleOne = new Object();
+        Object vehicleTwo = new Object();
+        Object vehicleThree = new Object();
+        Object vehicleFour = new Object();
+        Object vehicleFive = new Object();
+        Object vehicleSix = new Object();
+
+        parkingLotWithCapacityThree.park(vehicleOne);
+        parkingLotWithCapacityThree.park(vehicleTwo);
+        parkingLotWithCapacityThree.park(vehicleThree);
+        parkingLotWithCapacityTwo.park(vehicleFour);
+        parkingLotWithCapacityTwo.park(vehicleFive);
+
+        attendant.park(vehicleSix);
+
+
+        assertEquals(vehicleSix, parkingLotWithCapacityOne.unPark(vehicleSix));
+    }
+
 }
 

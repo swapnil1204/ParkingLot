@@ -1,5 +1,6 @@
 package com.thoughtworks.attendent;
 
+import com.thoughtworks.AllParkingLotsAreFull;
 import com.thoughtworks.ParkingLotFullException;
 import com.thoughtworks.SameVehicleIsAlreadyParkedException;
 import com.thoughtworks.parkinglot.ParkingLot;
@@ -14,19 +15,21 @@ public class Attendant {
 
     public Attendant(List<ParkingLot> parkingLots) {
         this.parkingLots = new ArrayList<>(parkingLots);
-        //this.parkingLots = parkingLots;
     }
 
-    public void park(Object object) throws ParkingLotFullException, SameVehicleIsAlreadyParkedException {
-        Collections.sort(parkingLots);
-        try {
-            ParkingLot parkingLotWithMaximumCapacity = parkingLots.get(parkingLots.size() - 1);
-            parkingLotWithMaximumCapacity.park(object);
+    public void park(Object object) throws SameVehicleIsAlreadyParkedException, AllParkingLotsAreFull {
+        parkingLots.sort(Collections.reverseOrder());
+
+        for (ParkingLot parkingLot : parkingLots) {
+            try {
+                parkingLot.park(object);
+                return;
+            } catch (ParkingLotFullException e) {
+               e.printStackTrace();
+                //continue;
+            }
         }
-        catch (Exception e){
-            ParkingLot parkingLotWithMaximumCapacity = parkingLots.get(parkingLots.size() - 2);
-            parkingLotWithMaximumCapacity.park(object);
-        }
+        throw new AllParkingLotsAreFull();
     }
 }
 
