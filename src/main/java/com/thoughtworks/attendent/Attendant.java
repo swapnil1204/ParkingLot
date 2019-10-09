@@ -15,8 +15,19 @@ public class Attendant {
     }
 
     public void park(Object object) throws ParkingLotFullException, SameVehicleIsAlreadyParkedException {
-        ParkingLot parkingLotOne = parkingLots.get(0);
-        parkingLotOne.park(object);
+        int temp = 0;
+        int index = 0;
+        for (int i = 0; parkingLots.size() > i; i++) {
+            int capacity = parkingLots.get(i).getCapacity();
+            if (capacity > temp) {
+                temp = capacity;
+                index = i;
+            }
+        }
+        ParkingLot parkingVehicleInMaxCapacityLot = parkingLots.get(index);
+        parkingVehicleInMaxCapacityLot.park(object);
     }
+
+
 }
 

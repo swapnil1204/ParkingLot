@@ -46,7 +46,7 @@ public class ParkingLot {
         return vehicles.contains(object);
     }
 
-    private boolean IsFull() {
+    public boolean IsFull() {
         return vehicles.size() == capacity;
     }
 

@@ -43,4 +43,17 @@ class AttendantTest {
 
         assertEquals(vehicle,parkingLotWithCapacityOne.unPark(vehicle));
     }
+
+    @Test
+    void givenTwoParkingLot_WhenPark_ThenShouldParkTheVehicleInMaximuxCapacityParkingLot() throws Exception {
+        ParkingLot parkingLotWithCapacityOne = new ParkingLot(1, subscribers);
+        ParkingLot parkingLotWithCapacityTwo = new ParkingLot(2, subscribers);
+        List<ParkingLot> parkingLots = of(parkingLotWithCapacityOne,parkingLotWithCapacityTwo);
+
+        Attendant attendant = new Attendant(parkingLots);
+        Object vehicle = new Object();
+        attendant.park(vehicle);
+
+        assertEquals(vehicle,parkingLotWithCapacityTwo.unPark(vehicle));
+    }
 }
