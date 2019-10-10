@@ -81,7 +81,7 @@ class AttendantTest {
         ParkingLot parkingLotWithCapacityOne = new ParkingLot(1, subscribers);
         ParkingLot parkingLotWithCapacityTwo = new ParkingLot(2, subscribers);
         ParkingLot parkingLotWithCapacityThree = new ParkingLot(3, subscribers);
-        List<ParkingLot> parkingLots = of(parkingLotWithCapacityTwo, parkingLotWithCapacityThree,parkingLotWithCapacityOne);
+        List<ParkingLot> parkingLots = of(parkingLotWithCapacityTwo, parkingLotWithCapacityThree, parkingLotWithCapacityOne);
 
         Attendant attendant = new Attendant(parkingLots);
         Object vehicleOne = new Object();

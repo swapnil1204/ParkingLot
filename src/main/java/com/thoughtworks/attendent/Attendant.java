@@ -19,14 +19,11 @@ public class Attendant {
 
     public void park(Object object) throws SameVehicleIsAlreadyParkedException, AllParkingLotsAreFull {
         parkingLots.sort(Collections.reverseOrder());
-
         for (ParkingLot parkingLot : parkingLots) {
             try {
                 parkingLot.park(object);
                 return;
-            } catch (ParkingLotFullException e) {
-               e.printStackTrace();
-                //continue;
+            } catch (ParkingLotFullException ignored) {
             }
         }
         throw new AllParkingLotsAreFull();
