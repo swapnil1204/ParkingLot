@@ -5,11 +5,13 @@ import com.thoughtworks.ParkingLotFullException;
 import com.thoughtworks.CarNotParkedHereException;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-public class ParkingLot implements Comparable<ParkingLot> {
+public class ParkingLot {
 
     private int capacity;
+    private int freeSpace;
     private List<Subscriber> subscribers;
 
     private List<Object> vehicles = new ArrayList<>();
@@ -17,6 +19,7 @@ public class ParkingLot implements Comparable<ParkingLot> {
     public ParkingLot(int capacity, List<Subscriber> subscribers) {
         this.capacity = capacity;
         this.subscribers = subscribers;
+        this.freeSpace = capacity;
     }
 
     public void park(Object object) throws SameVehicleIsAlreadyParkedException, ParkingLotFullException {
@@ -27,6 +30,7 @@ public class ParkingLot implements Comparable<ParkingLot> {
             throw new SameVehicleIsAlreadyParkedException();
         }
         vehicles.add(object);
+        freeSpace = capacity - 1;
         if (isFull()) {
             sendNotificationToAllExistingSubscribersWhenParkingLotIsFull();
         }
@@ -82,14 +86,17 @@ public class ParkingLot implements Comparable<ParkingLot> {
         this.subscribers.remove(subscribers);
     }
 
-    public int getCapacity() {
-        return this.capacity;
-    }
+    public static Comparator<ParkingLot> capacityComparator = new Comparator<ParkingLot>() {
+        @Override
+        public int compare(ParkingLot o1, ParkingLot o2) {
+            return o1.capacity - o2.capacity;
+        }
+    };
 
-
-    @Override
-    public int compareTo(ParkingLot o) {
-        return this.capacity - o.capacity;
-    }
-
+    public static Comparator<ParkingLot> freeSpaceComparator = new Comparator<ParkingLot>() {
+        @Override
+        public int compare(ParkingLot o1, ParkingLot o2) {
+            return o1.freeSpace - o2.freeSpace;
+        }
+    };
 }
