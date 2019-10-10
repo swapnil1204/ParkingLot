@@ -6,22 +6,21 @@ import com.thoughtworks.SameVehicleIsAlreadyParkedException;
 import com.thoughtworks.parkinglot.ParkingLot;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
-public class ParkingLotWithMaximumCapacity implements ParkingStrategy {
+import static com.thoughtworks.parkinglot.ParkingLot.capacityComparator;
 
-    private final Comparator comparatorType;
+public class ParkingLotWithMaximumFreeSpace implements ParkingStrategy {
+
     private List<ParkingLot> parkingLots;
 
-    public ParkingLotWithMaximumCapacity(List<ParkingLot> parkingLots, Comparator comparatorType) {
+    public ParkingLotWithMaximumFreeSpace(List<ParkingLot> parkingLots) {
         this.parkingLots = new ArrayList<>(parkingLots);
-        this.comparatorType = comparatorType;
     }
 
     @Override
     public void park(Object object) throws SameVehicleIsAlreadyParkedException, AllParkingLotsAreFull {
-        parkingLots.sort(comparatorType.reversed());
+        parkingLots.sort(capacityComparator.reversed());
         for (ParkingLot parkingLot : parkingLots) {
             try {
                 parkingLot.park(object);
@@ -32,4 +31,3 @@ public class ParkingLotWithMaximumCapacity implements ParkingStrategy {
         throw new AllParkingLotsAreFull();
     }
 }
-

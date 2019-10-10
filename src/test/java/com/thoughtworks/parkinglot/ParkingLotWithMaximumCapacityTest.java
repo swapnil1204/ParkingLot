@@ -23,7 +23,7 @@ class ParkingLotWithMaximumCapacityTest {
     void givenOneParkingLot_WhenPark_ThenShouldParkVehicleInGivenParkingLot() {
         ParkingLot parkingLotWithCapacityOne = new ParkingLot(1, subscribers);
         List<ParkingLot> parkingLots = of(parkingLotWithCapacityOne);
-        ParkingLotWithMaximumCapacity attendant = new ParkingLotWithMaximumCapacity(parkingLots);
+        ParkingLotWithMaximumCapacity attendant = new ParkingLotWithMaximumCapacity(parkingLots,ParkingLot.capacityComparator);
         Object vehicle = new Object();
 
         assertDoesNotThrow(() -> attendant.park(vehicle));
@@ -33,7 +33,7 @@ class ParkingLotWithMaximumCapacityTest {
     void givenOneParkingLot_WhenPark_ThenShouldParkAndUnparkVehicleFromGivenParkingLot() throws Exception {
         ParkingLot parkingLotWithCapacityOne = new ParkingLot(1, subscribers);
         List<ParkingLot> parkingLots = of(parkingLotWithCapacityOne);
-        ParkingLotWithMaximumCapacity attendant = new ParkingLotWithMaximumCapacity(parkingLots);
+        ParkingLotWithMaximumCapacity attendant = new ParkingLotWithMaximumCapacity(parkingLots,ParkingLot.capacityComparator);
         Object vehicle = new Object();
         attendant.park(vehicle);
 
@@ -46,7 +46,7 @@ class ParkingLotWithMaximumCapacityTest {
         ParkingLot parkingLotWithCapacityTwo = new ParkingLot(2, subscribers);
         List<ParkingLot> parkingLots = of(parkingLotWithCapacityOne, parkingLotWithCapacityTwo);
 
-        ParkingLotWithMaximumCapacity attendant = new ParkingLotWithMaximumCapacity(parkingLots);
+        ParkingLotWithMaximumCapacity attendant = new ParkingLotWithMaximumCapacity(parkingLots,ParkingLot.capacityComparator);
         Object vehicle = new Object();
         attendant.park(vehicle);
 
@@ -59,7 +59,7 @@ class ParkingLotWithMaximumCapacityTest {
         ParkingLot parkingLotWithCapacityThree = new ParkingLot(3, subscribers);
         List<ParkingLot> parkingLots = of(parkingLotWithCapacityTwo, parkingLotWithCapacityThree);
 
-        ParkingLotWithMaximumCapacity attendant = new ParkingLotWithMaximumCapacity(parkingLots);
+        ParkingLotWithMaximumCapacity attendant = new ParkingLotWithMaximumCapacity(parkingLots,ParkingLot.capacityComparator);
         Object vehicleOne = new Object();
         Object vehicleTwo = new Object();
         Object vehicleThree = new Object();
@@ -83,7 +83,7 @@ class ParkingLotWithMaximumCapacityTest {
         ParkingLot parkingLotWithCapacityThree = new ParkingLot(3, subscribers);
         List<ParkingLot> parkingLots = of(parkingLotWithCapacityTwo, parkingLotWithCapacityThree, parkingLotWithCapacityOne);
 
-        ParkingLotWithMaximumCapacity attendant = new ParkingLotWithMaximumCapacity(parkingLots);
+        ParkingLotWithMaximumCapacity attendant = new ParkingLotWithMaximumCapacity(parkingLots,ParkingLot.capacityComparator);
         Object vehicleOne = new Object();
         Object vehicleTwo = new Object();
         Object vehicleThree = new Object();
