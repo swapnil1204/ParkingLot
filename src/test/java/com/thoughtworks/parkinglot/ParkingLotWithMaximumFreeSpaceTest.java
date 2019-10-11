@@ -26,8 +26,8 @@ class ParkingLotWithMaximumFreeSpaceTest {
     void givenOneParkingLot_WhenPark_ThenShouldParkVehicleInGivenParkingLot() {
         ParkingLot parkingLotWithFreeSpaceOne = new ParkingLot(1, subscribers);
         List<ParkingLot> parkingLots = of(parkingLotWithFreeSpaceOne);
-        ParkingLotWithMaximumFreeSpace parkingLotWithMaximumFreeSpace = new ParkingLotWithMaximumFreeSpace(parkingLots);
-        Attendant attendant = new Attendant(parkingLotWithMaximumFreeSpace);
+        ParkingLotWithMaximumFreeSpace parkingLotWithMaximumFreeSpace = new ParkingLotWithMaximumFreeSpace();
+        Attendant attendant = new Attendant(parkingLotWithMaximumFreeSpace, parkingLots);
         Object vehicle = new Object();
 
         assertDoesNotThrow(() -> attendant.park(vehicle));
@@ -37,8 +37,8 @@ class ParkingLotWithMaximumFreeSpaceTest {
     void givenOneParkingLot_WhenPark_ThenShouldParkAndUnparkVehicleFromGivenParkingLot() throws Exception {
         ParkingLot parkingLotWithFreeSpaceOne = new ParkingLot(1, subscribers);
         List<ParkingLot> parkingLots = of(parkingLotWithFreeSpaceOne);
-        ParkingLotWithMaximumFreeSpace parkingLotWithMaximumFreeSpace = new ParkingLotWithMaximumFreeSpace(parkingLots);
-        Attendant attendant = new Attendant(parkingLotWithMaximumFreeSpace);
+        ParkingLotWithMaximumFreeSpace parkingLotWithMaximumFreeSpace = new ParkingLotWithMaximumFreeSpace();
+        Attendant attendant = new Attendant(parkingLotWithMaximumFreeSpace, parkingLots);
         Object vehicle = new Object();
         attendant.park(vehicle);
 
@@ -50,8 +50,8 @@ class ParkingLotWithMaximumFreeSpaceTest {
         ParkingLot parkingLotWihFreeSpaceOne = new ParkingLot(1, subscribers);
         ParkingLot parkingLotWithFreeSpaceTwo = new ParkingLot(2, subscribers);
         List<ParkingLot> parkingLots = of(parkingLotWihFreeSpaceOne,parkingLotWithFreeSpaceTwo);
-        ParkingLotWithMaximumFreeSpace ParkingLotWithMaximumFreeSpace = new ParkingLotWithMaximumFreeSpace(parkingLots);
-        Attendant attendant = new Attendant(ParkingLotWithMaximumFreeSpace);
+        ParkingLotWithMaximumFreeSpace ParkingLotWithMaximumFreeSpace = new ParkingLotWithMaximumFreeSpace();
+        Attendant attendant = new Attendant(ParkingLotWithMaximumFreeSpace, parkingLots);
         Object vehicle = new Object();
         attendant.park(vehicle);
 
@@ -64,8 +64,8 @@ class ParkingLotWithMaximumFreeSpaceTest {
         ParkingLot parkingLotWithFreeSpaceThree = new ParkingLot(3, subscribers);
 
         List<ParkingLot> parkingLots = of(parkingLotWithFreeSpaceTwo,parkingLotWithFreeSpaceThree);
-        ParkingLotWithMaximumFreeSpace ParkingLotWithMaximumFreeSpace = new ParkingLotWithMaximumFreeSpace(parkingLots);
-        Attendant attendant = new Attendant(ParkingLotWithMaximumFreeSpace);
+        ParkingLotWithMaximumFreeSpace ParkingLotWithMaximumFreeSpace = new ParkingLotWithMaximumFreeSpace();
+        Attendant attendant = new Attendant(ParkingLotWithMaximumFreeSpace, parkingLots);
 
         Object vehicleOne = new Object();
         Object vehicleTwo = new Object();

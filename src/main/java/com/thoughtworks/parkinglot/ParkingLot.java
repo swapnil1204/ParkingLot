@@ -84,21 +84,11 @@ public class ParkingLot {
         this.subscribers.remove(subscribers);
     }
 
-    public static Comparator<ParkingLot> capacityComparator = new Comparator<ParkingLot>() {
-        @Override
-        public int compare(ParkingLot o1, ParkingLot o2) {
-            return o1.capacity - o2.capacity;
-        }
-    };
+    public static Comparator<ParkingLot> capacityComparator = Comparator.comparingInt(o -> o.capacity);
 
     private int getFreeSpace() {
         return this.capacity - this.vehicles.size();
     }
 
-    public static Comparator<ParkingLot> freeSpaceComparator = new Comparator<ParkingLot>() {
-        @Override
-        public int compare(ParkingLot o1, ParkingLot o2) {
-            return o1.getFreeSpace() - o2.getFreeSpace();
-        }
-    };
+    public static Comparator<ParkingLot> freeSpaceComparator = Comparator.comparingInt(ParkingLot::getFreeSpace);
 }

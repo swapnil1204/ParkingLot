@@ -25,10 +25,10 @@ class ParkingLotWithMaximumCapacityTest {
     void givenOneParkingLot_WhenPark_ThenShouldParkVehicleInGivenParkingLot() {
         ParkingLot parkingLotWithCapacityOne = new ParkingLot(1, subscribers);
         List<ParkingLot> parkingLots = of(parkingLotWithCapacityOne);
-        ParkingLotWithMaximumCapacity parkingLotWithMaximumCapacity = new ParkingLotWithMaximumCapacity(parkingLots);
+        ParkingLotWithMaximumCapacity parkingLotWithMaximumCapacity = new ParkingLotWithMaximumCapacity();
         Object vehicle = new Object();
 
-        Attendant attendant = new Attendant(parkingLotWithMaximumCapacity);
+        Attendant attendant = new Attendant(parkingLotWithMaximumCapacity, parkingLots);
         assertDoesNotThrow(() -> attendant.park(vehicle));
     }
 
@@ -36,8 +36,8 @@ class ParkingLotWithMaximumCapacityTest {
     void givenOneParkingLot_WhenPark_ThenShouldParkAndUnparkVehicleFromGivenParkingLot() throws Exception {
         ParkingLot parkingLotWithCapacityOne = new ParkingLot(1, subscribers);
         List<ParkingLot> parkingLots = of(parkingLotWithCapacityOne);
-        ParkingLotWithMaximumCapacity parkingLotWithMaximumCapacity = new ParkingLotWithMaximumCapacity(parkingLots);
-        Attendant attendant = new Attendant(parkingLotWithMaximumCapacity);
+        ParkingLotWithMaximumCapacity parkingLotWithMaximumCapacity = new ParkingLotWithMaximumCapacity();
+        Attendant attendant = new Attendant(parkingLotWithMaximumCapacity, parkingLots);
         Object vehicle = new Object();
         attendant.park(vehicle);
 
@@ -49,8 +49,8 @@ class ParkingLotWithMaximumCapacityTest {
         ParkingLot parkingLotWithCapacityOne = new ParkingLot(1, subscribers);
         ParkingLot parkingLotWithCapacityTwo = new ParkingLot(2, subscribers);
         List<ParkingLot> parkingLots = of(parkingLotWithCapacityOne,parkingLotWithCapacityTwo);
-        ParkingLotWithMaximumCapacity parkingLotWithMaximumCapacity = new ParkingLotWithMaximumCapacity(parkingLots);
-        Attendant attendant = new Attendant(parkingLotWithMaximumCapacity);
+        ParkingLotWithMaximumCapacity parkingLotWithMaximumCapacity = new ParkingLotWithMaximumCapacity();
+        Attendant attendant = new Attendant(parkingLotWithMaximumCapacity, parkingLots);
         Object vehicle = new Object();
         attendant.park(vehicle);
 
@@ -63,8 +63,8 @@ class ParkingLotWithMaximumCapacityTest {
         ParkingLot parkingLotWithCapacityThree = new ParkingLot(3, subscribers);
 
         List<ParkingLot> parkingLots = of(parkingLotWithCapacityTwo,parkingLotWithCapacityThree);
-        ParkingLotWithMaximumCapacity parkingLotWithMaximumCapacity = new ParkingLotWithMaximumCapacity(parkingLots);
-        Attendant attendant = new Attendant(parkingLotWithMaximumCapacity);
+        ParkingLotWithMaximumCapacity parkingLotWithMaximumCapacity = new ParkingLotWithMaximumCapacity();
+        Attendant attendant = new Attendant(parkingLotWithMaximumCapacity, parkingLots);
 
         Object vehicleOne = new Object();
         Object vehicleTwo = new Object();
@@ -89,14 +89,14 @@ class ParkingLotWithMaximumCapacityTest {
         ParkingLot parkingLotWithCapacityThree = new ParkingLot(3, subscribers);
         List<ParkingLot> parkingLots = of(parkingLotWithCapacityTwo, parkingLotWithCapacityThree, parkingLotWithCapacityOne);
 
-        ParkingLotWithMaximumCapacity parkingLotWithMaximumCapacity = new ParkingLotWithMaximumCapacity(parkingLots);
+        ParkingLotWithMaximumCapacity parkingLotWithMaximumCapacity = new ParkingLotWithMaximumCapacity();
         Object vehicleOne = new Object();
         Object vehicleTwo = new Object();
         Object vehicleThree = new Object();
         Object vehicleFour = new Object();
         Object vehicleFive = new Object();
         Object vehicleSix = new Object();
-        Attendant attendant = new Attendant(parkingLotWithMaximumCapacity);
+        Attendant attendant = new Attendant(parkingLotWithMaximumCapacity, parkingLots);
         attendant.park(vehicleOne);
         attendant.park(vehicleTwo);
         attendant.park(vehicleThree);
