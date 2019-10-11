@@ -1,4 +1,4 @@
-package com.thoughtworks.parkinglot;
+package com.thoughtworks.subscriber;
 
 public interface Subscriber {
     void gotNotificationWhenSpaceIsFull();

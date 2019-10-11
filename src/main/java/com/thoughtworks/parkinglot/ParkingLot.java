@@ -1,8 +1,9 @@
 package com.thoughtworks.parkinglot;
 
-import com.thoughtworks.SameVehicleIsAlreadyParkedException;
-import com.thoughtworks.ParkingLotFullException;
-import com.thoughtworks.CarNotParkedHereException;
+import com.thoughtworks.Exceptions.ParkingLotFullException;
+import com.thoughtworks.Exceptions.CarNotParkedHereException;
+import com.thoughtworks.Exceptions.SameVehicleIsAlreadyParkedException;
+import com.thoughtworks.subscriber.Subscriber;
 
 import java.util.ArrayList;
 import java.util.Comparator;

@@ -1,7 +1,7 @@
-package com.thoughtworks.consumer;
+package com.thoughtworks.subscriber;
 
-import com.thoughtworks.ParkingLotFullException;
-import com.thoughtworks.SameVehicleIsAlreadyParkedException;
+import com.thoughtworks.Exceptions.ParkingLotFullException;
+import com.thoughtworks.Exceptions.SameVehicleIsAlreadyParkedException;
 import com.thoughtworks.parkinglot.*;
 
 public class SanjayScenerioOne{

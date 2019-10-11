@@ -1,4 +1,4 @@
-package com.thoughtworks;
+package com.thoughtworks.Exceptions;
 
 public class AllParkingLotsAreFull extends Exception {
 }

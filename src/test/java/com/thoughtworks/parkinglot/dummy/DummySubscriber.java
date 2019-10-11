@@ -1,6 +1,6 @@
 package com.thoughtworks.parkinglot.dummy;
 
-import com.thoughtworks.parkinglot.Subscriber;
+import com.thoughtworks.subscriber.Subscriber;
 
 public class DummySubscriber implements Subscriber {
 

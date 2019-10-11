@@ -2,6 +2,7 @@ package com.thoughtworks.parkinglot;
 
 import com.thoughtworks.attendent.Attendant;
 import com.thoughtworks.attendent.ParkingLotWithMaximumFreeSpace;
+import com.thoughtworks.subscriber.Subscriber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
