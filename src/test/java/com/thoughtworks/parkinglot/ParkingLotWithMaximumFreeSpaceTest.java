@@ -46,7 +46,7 @@ class ParkingLotWithMaximumFreeSpaceTest {
     }
 
     @Test
-    void givenTwoParkingLot_WhenPark_ThenShouldParkTheVehicleInMaximumCapacityParkingLot() throws Exception {
+    void givenTwoParkingLot_WhenPark_ThenShouldParkTheVehicleInMaximumFreeSpaceAvailableParkingLot() throws Exception {
         ParkingLot parkingLotWihFreeSpaceOne = new ParkingLot(1, subscribers);
         ParkingLot parkingLotWithFreeSpaceTwo = new ParkingLot(2, subscribers);
         List<ParkingLot> parkingLots = of(parkingLotWihFreeSpaceOne,parkingLotWithFreeSpaceTwo);
@@ -59,7 +59,7 @@ class ParkingLotWithMaximumFreeSpaceTest {
     }
 
     @Test
-    void givenTwoParkingLot_WhenMaximumCapacityParkingLotIsFull_ThenShouldParkTheVehicleInAnotherMaximumCapacityParkingLot() throws Exception {
+    void givenTwoParkingLot_WhenPark_ThenShouldParkTheVehicleInMaximumFreeSpaceAvailableParkingLotAtTheTime() throws Exception {
         ParkingLot parkingLotWithFreeSpaceTwo = new ParkingLot(2, subscribers);
         ParkingLot parkingLotWithFreeSpaceThree = new ParkingLot(3, subscribers);
 

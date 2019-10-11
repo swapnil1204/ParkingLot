@@ -83,7 +83,7 @@ class ParkingLotWithMaximumCapacityTest {
     }
 
     @Test
-    void givenThreeParkingLot_WhenMaximumCapacityParkingLotIsFull_ThenShouldParkTheVehicleInRemainingMaximumCapacityParkingLot() throws Exception {//TODO
+    void givenThreeParkingLot_WhenMaximumCapacityParkingLotIsFull_ThenShouldParkTheVehicleInRemainingMaximumCapacityParkingLot() throws Exception {
         ParkingLot parkingLotWithCapacityOne = new ParkingLot(1, subscribers);
         ParkingLot parkingLotWithCapacityTwo = new ParkingLot(2, subscribers);
         ParkingLot parkingLotWithCapacityThree = new ParkingLot(3, subscribers);
