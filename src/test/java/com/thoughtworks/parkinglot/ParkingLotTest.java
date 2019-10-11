@@ -28,7 +28,7 @@ public class ParkingLotTest {
     void givenParkingLotHasCapacity_WhenPark_ThenShouldPark() throws Exception {
         DummySubscriber dummyOwner = getDummyOwner();
         subscribers.add(dummyOwner);
-        ParkingLot parkingLot = new ParkingLot(1, subscribers); //this represent available lots
+        ParkingLot parkingLot = new ParkingLot(1, subscribers);
 
         assertDoesNotThrow(() -> parkingLot.park(new Object()));
     }
@@ -37,7 +37,7 @@ public class ParkingLotTest {
     void givenParkingLotIsFull_WhenPark_ThenShouldNotPark() throws Exception {
         DummySubscriber dummyOwner = getDummyOwner();
         subscribers.add(dummyOwner);
-        ParkingLot parkingLot = new ParkingLot(1, subscribers); // spaceAvailable = 1
+        ParkingLot parkingLot = new ParkingLot(1, subscribers);
         parkingLot.park(new Object()); // spaceAvailable - -
 
         assertThrows(ParkingLotFullException.class, () -> {

@@ -6,8 +6,6 @@ import com.thoughtworks.SameVehicleIsAlreadyParkedException;
 import com.thoughtworks.parkinglot.ParkingLot;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class ParkingLotWithMaximumCapacity implements ParkingStrategy {
