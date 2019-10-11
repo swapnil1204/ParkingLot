@@ -1,5 +1,6 @@
 package com.thoughtworks.parkinglot;
 
+import com.thoughtworks.attendent.Attendant;
 import com.thoughtworks.attendent.ParkingLotWithMaximumCapacity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,9 +24,10 @@ class ParkingLotWithMaximumCapacityTest {
     void givenOneParkingLot_WhenPark_ThenShouldParkVehicleInGivenParkingLot() {
         ParkingLot parkingLotWithCapacityOne = new ParkingLot(1, subscribers);
         List<ParkingLot> parkingLots = of(parkingLotWithCapacityOne);
-        ParkingLotWithMaximumCapacity attendant = new ParkingLotWithMaximumCapacity(parkingLots,ParkingLot.capacityComparator);
+        ParkingLotWithMaximumCapacity parkingLotWithMaximumCapacity = new ParkingLotWithMaximumCapacity(parkingLots);
         Object vehicle = new Object();
 
+        Attendant attendant = new Attendant(parkingLotWithMaximumCapacity);
         assertDoesNotThrow(() -> attendant.park(vehicle));
     }
 
@@ -33,7 +35,8 @@ class ParkingLotWithMaximumCapacityTest {
     void givenOneParkingLot_WhenPark_ThenShouldParkAndUnparkVehicleFromGivenParkingLot() throws Exception {
         ParkingLot parkingLotWithCapacityOne = new ParkingLot(1, subscribers);
         List<ParkingLot> parkingLots = of(parkingLotWithCapacityOne);
-        ParkingLotWithMaximumCapacity attendant = new ParkingLotWithMaximumCapacity(parkingLots,ParkingLot.capacityComparator);
+        ParkingLotWithMaximumCapacity parkingLotWithMaximumCapacity = new ParkingLotWithMaximumCapacity(parkingLots);
+        Attendant attendant = new Attendant(parkingLotWithMaximumCapacity);
         Object vehicle = new Object();
         attendant.park(vehicle);
 
@@ -44,9 +47,9 @@ class ParkingLotWithMaximumCapacityTest {
     void givenTwoParkingLot_WhenPark_ThenShouldParkTheVehicleInMaximumCapacityParkingLot() throws Exception {
         ParkingLot parkingLotWithCapacityOne = new ParkingLot(1, subscribers);
         ParkingLot parkingLotWithCapacityTwo = new ParkingLot(2, subscribers);
-        List<ParkingLot> parkingLots = of(parkingLotWithCapacityOne, parkingLotWithCapacityTwo);
-
-        ParkingLotWithMaximumCapacity attendant = new ParkingLotWithMaximumCapacity(parkingLots,ParkingLot.capacityComparator);
+        List<ParkingLot> parkingLots = of(parkingLotWithCapacityOne,parkingLotWithCapacityTwo);
+        ParkingLotWithMaximumCapacity parkingLotWithMaximumCapacity = new ParkingLotWithMaximumCapacity(parkingLots);
+        Attendant attendant = new Attendant(parkingLotWithMaximumCapacity);
         Object vehicle = new Object();
         attendant.park(vehicle);
 
@@ -57,9 +60,11 @@ class ParkingLotWithMaximumCapacityTest {
     void givenTwoParkingLot_WhenMaximumCapacityParkingLotIsFull_ThenShouldParkTheVehicleInAnotherMaximumCapacityParkingLot() throws Exception {
         ParkingLot parkingLotWithCapacityTwo = new ParkingLot(2, subscribers);
         ParkingLot parkingLotWithCapacityThree = new ParkingLot(3, subscribers);
-        List<ParkingLot> parkingLots = of(parkingLotWithCapacityTwo, parkingLotWithCapacityThree);
 
-        ParkingLotWithMaximumCapacity attendant = new ParkingLotWithMaximumCapacity(parkingLots,ParkingLot.capacityComparator);
+        List<ParkingLot> parkingLots = of(parkingLotWithCapacityTwo,parkingLotWithCapacityThree);
+        ParkingLotWithMaximumCapacity parkingLotWithMaximumCapacity = new ParkingLotWithMaximumCapacity(parkingLots);
+        Attendant attendant = new Attendant(parkingLotWithMaximumCapacity);
+
         Object vehicleOne = new Object();
         Object vehicleTwo = new Object();
         Object vehicleThree = new Object();
@@ -83,22 +88,20 @@ class ParkingLotWithMaximumCapacityTest {
         ParkingLot parkingLotWithCapacityThree = new ParkingLot(3, subscribers);
         List<ParkingLot> parkingLots = of(parkingLotWithCapacityTwo, parkingLotWithCapacityThree, parkingLotWithCapacityOne);
 
-        ParkingLotWithMaximumCapacity attendant = new ParkingLotWithMaximumCapacity(parkingLots,ParkingLot.capacityComparator);
+        ParkingLotWithMaximumCapacity parkingLotWithMaximumCapacity = new ParkingLotWithMaximumCapacity(parkingLots);
         Object vehicleOne = new Object();
         Object vehicleTwo = new Object();
         Object vehicleThree = new Object();
         Object vehicleFour = new Object();
         Object vehicleFive = new Object();
         Object vehicleSix = new Object();
-
-        parkingLotWithCapacityThree.park(vehicleOne);
-        parkingLotWithCapacityThree.park(vehicleTwo);
-        parkingLotWithCapacityThree.park(vehicleThree);
-        parkingLotWithCapacityTwo.park(vehicleFour);
-        parkingLotWithCapacityTwo.park(vehicleFive);
-
+        Attendant attendant = new Attendant(parkingLotWithMaximumCapacity);
+        attendant.park(vehicleOne);
+        attendant.park(vehicleTwo);
+        attendant.park(vehicleThree);
+        attendant.park(vehicleFour);
+        attendant.park(vehicleFive);
         attendant.park(vehicleSix);
-
 
         assertEquals(vehicleSix, parkingLotWithCapacityOne.unPark(vehicleSix));
     }
